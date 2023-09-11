@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login concluído</title>
+    <link rel = "icon" href = "../images/favicon.png"/>
+    <link rel = "stylesheet" href = "../styles/output.css"/>
+    <link rel = "stylesheet" href = "../styles/home.css"/>
+</head>
+<body>
+    <main id = "home-main">
+        <div id = "home-area">
+            <section class = "home-area-divs" id = "home-image-div">
+                <img id = "home-image" src = "../images/welcome.png"></img>
+            </section>
+            <section class = "home-area-divs" id = "home-texts-div">
+                <% if (user) { %>
+                    <h2>Seja 
+                        <% if (user.gender == "M") {%>
+                            bem-vindo<%}%><% if (user.gender == "F") {%>bem-vinda<%}%><% if (user.gender == "O") {%>bem-vindo(a)
+                        <%}%>,</h2>
+                    <h1 class = "text-4xl"><%= user.firstName %> <%= user.lastName %></h1>
+                <% } %>
+                <h2 class = "text-lg">Você está online agora!</h2>
+                <div id = "home-logout-button-div">
+                    <a href = "/" id = "home-logout-button-link">
+                        <button type = "button" id = "home-logout-button">
+                            <div id = "logout-button-icon-div">
+                                <svg id = "logout-button-icon" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 1280.000000 1085.000000" preserveAspectRatio="xMidYMid meet">
+                                    <g id = "logout-icon-g" transform="translate(0.000000,1085.000000) scale(0.100000,-0.100000)" stroke="none">
+                                        <path d="M3449 10837 c-20 -8 -49 -23 -65 -35 -59 -43 -3343 -3338 -3360 -3372 -23 -45 -24 -143 -2 -190 8 -19 431 -533 939 -1141 508 -608 1228 -1470 1599 -1915 371 -445 702 -840 734 -878 75 -87 142 -122 218 -113 68 8 126 43 163 97 l30 45 3 1166 2 1166 78 17 c328 69 819 116 1217 116 1668 -1 3233 -594 4555 -1725 1068 -914 1997 -2192 2736 -3768 117 -250 150 -289 256 -303 68 -9 126 12 179 65 74 73 77 95 45 346 -256 1983 -832 3673 -1689 4955 -571 853 -1262 1536 -2077 2052 -924 585 -2011 947 -3190 1063 -297 29 -484 37 -840 37 -443 -1 -800 -24 -1157 -76 l-83 -12 -2 1131 c-3 1030 -4 1133 -20 1160 -21 39 -65 83 -101 102 -41 21 -125 26 -168 10z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div id = "logout-button-text-div">
+                                <span id = "logout-button-text">Voltar</span>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script type = "text/javascript" src = "../scripts/logoutIcon.js"></script>
+</body>
+</html>

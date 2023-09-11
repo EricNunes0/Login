@@ -1,0 +1,206 @@
+:root {
+    --home-login-button-width: 200px;
+    --home-login-button-height: 45px;
+    --home-login-button-border-size: 2px;
+    --home-login-button-border-radius: 5px;
+    --home-login-button-color1: #00FFA3;
+    --home-login-button-color2: #DC1FFF;
+    --home-image-width: 167.4px;
+    --home-image-height: 357px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    overflow-x: hidden;
+    background-image: linear-gradient(135deg, #721485, #1592cc);
+}
+
+#home-main {
+    width: 100vw;
+    height: 100vh;
+}
+
+#home-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#home-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap: 10rem;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+}
+
+#home-text-section {
+    width: 40%;
+    padding: 1rem;
+}
+
+#home-texts-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 20px 0;
+    margin: 20px 0;
+}
+
+#home-title-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+#home-subtitle-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+#home-subtitle {
+    width: 80%;
+    font-size: 14px;
+    text-align: center;
+}
+
+#home-login-button-div {
+    margin: 10px 0;
+}
+
+#home-login-button {
+    position: relative;
+    width: calc(var(--home-login-button-width) + calc(var(--home-login-button-border-size) * 2));
+    height: calc(var(--home-login-button-height) + calc(var(--home-login-button-border-size) * 2));
+    background: linear-gradient(to right, var(--home-login-button-color1), var(--home-login-button-color2));
+    border-radius: calc(var(--home-login-button-border-radius) + 1px);
+    transition: all 0.3s;
+}
+#home-login-button::before {
+    content: "";
+    width: var(--home-login-button-width);
+    height: var(--home-login-button-height);
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: var(--home-login-button-border-size);
+    left: var(--home-login-button-border-size);
+    background-color: white;
+    border-radius: var(--home-login-button-border-radius);
+    transition: all 0.3s;
+}
+#home-login-button::after {
+    content: "Fazer login";
+    width: calc(var(--home-login-button-width) + calc(var(--home-login-button-border-size) * 2));
+    height: calc(var(--home-login-button-height) + calc(var(--home-login-button-border-size) * 2));
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, var(--home-login-button-color1), var(--home-login-button-color2));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+#home-login-button:hover {
+    transform: scale(1.05);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+}
+#home-login-button:hover::before {
+    background: linear-gradient(to right, var(--home-login-button-color1), var(--home-login-button-color2));
+}
+#home-login-button:hover::after {
+    background: unset;
+    color: #fff;
+    font-weight: bold;
+}
+
+#home-signup-div {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 20px 0;
+}
+
+#home-signup {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+}
+
+#home-signup-link {
+    color: rgba(0, 149, 246);
+    font-weight: 600;
+}
+#home-signup-link:hover {
+    text-decoration: underline;
+}
+
+#home-image-div {
+    position: relative;
+    width: var(--home-image-width);
+    height: var(--home-image-height);
+}
+
+#home-image-mobile {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: var(--home-image-width);
+    height: var(--home-image-height);
+    background-image: url("../images/mobile.png");
+    background-size: 100% 100%;
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.3));
+}
+
+#home-image {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: var(--home-image-width);
+    height: var(--home-image-height);
+    background-size: 100% 100%;
+    border-radius: 30px;
+    transition: all 1s;
+}
+
+
+@media screen and (max-width: 768px) {
+    #home-area {
+        gap: unset
+    }
+
+    #home-text-section {
+        width: 90vw;
+    }
+
+    #home-image-div {
+        display: none;
+    }
+}

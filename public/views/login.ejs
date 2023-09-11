@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel = "icon" href = "../images/favicon.png"/>
+    <link rel = "stylesheet" href = "../styles/output.css"/>
+    <link rel = "stylesheet" href = "../styles/sign.css"/>
+    <link rel = "stylesheet" href = "../styles/login.css"/>
+</head>
+<body class = "sign-bodies">
+    <main class = "sign-mains">
+        <div class = "sign-containers">
+            <div class = "sign-areas">
+                <section class = "sign-headers">
+                    <div class = "sign-title-divs">
+                        <p class = "sign-titles">Login</p>
+                    </div>
+                    <div class = "sign-subtitle-divs">
+                        <p class = "sign-subtitles">Velocidade e praticidade</p>
+                    </div>
+                </section>
+                <section class = "sign-form-sections">
+                    <form class = "sign-forms" id = "signup-form" method="post" action ="/login/validate">
+                        <div class = "sign-grid-divs" id = "sign-grid-1">
+                            <label class = "sign-labels" for = "email">E-mail:</label>
+                            <div class = "sign-input-divs">
+                                <input type = "email" class = "sign-text-inputs" name = "email" id = "email" placeholder = "E-mail"/>
+                                <img class = "input-warning-icons hide" id = "email-warning" src = "../images/warning.png">
+                            </div>
+                        </div>
+                        <div class = "sign-grid-divs" id = "sign-grid-3">
+                            <label class = "sign-labels" for = "password">Senha:</label>
+                            <div class = "sign-input-divs">
+                                <input type = "password" class = "sign-text-inputs" name = "password" id = "password" placeholder = "Senha"/>
+                                <img class = "input-warning-icons hide" id = "password-warning" src = "../images/warning.png">
+                            </div>
+                        </div>
+                        <div class = "sign-grid-divs" id = "sign-grid-5">
+                            <button type="submit" class="sign-submits" id = "signup-submit">Entrar</button>
+                        </div>
+                    </form>
+                    
+                    <div class = "sign-redirect-divs">
+                        <span class = "sign-redirects">Não tem uma conta? <a class = "sign-redirect-links" href = "/signup">Cadastre-se</a></span>
+                    </div>
+                    <div class = "sign-warning-divs">
+                        <span class = "sign-warnings text-red-500" id = "signup-warning"></span>
+                    </div>
+                </section>
+                <script type="text/javascript">
+                    let email = document.querySelector("#email");
+                    let emailWarning = document.querySelector("#email-warning");
+                    let password = document.querySelector("#password");
+                    let passwordWarning = document.querySelector("#password-warning");
+                    let warning = document.querySelector("#signup-warning");
+                    <% if(typeof error !="undefined" && error) { %>
+                        let errorType = <%- error.type %>;
+                        let errorMessage = <%- error.message %>;
+
+                        if(errorType == "EmailNotFound") {
+                            email.style.outline = "1px solid #f02020";
+                            emailWarning.classList.remove("hide");
+                        } else if(errorType == "InvalidPassword"){
+                            password.style.outline = "1px solid #f02020";
+                            passwordWarning.classList.remove("hide");
+                        };
+                        warning.innerHTML = errorMessage;
+                    <% } %>
+                </script>
+            </div>
+        </div>
+    </main>
+    <script type = "text/javascript" src = "../scripts/validateLogin.js"></script>
+    <script type = "text/javascript" src = "../scripts/warningAlert.js"></script>
+</body>
+</html>

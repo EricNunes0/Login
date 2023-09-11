@@ -1,0 +1,7 @@
+html, body {
+    background-image: linear-gradient(130deg, rgb(36, 230, 101, 0.5), rgb(196, 74, 207, 0.5));
+}
+
+.sign-submits {
+    background-image: linear-gradient(135deg, transparent 80%, #a0f, #f0f);
+}

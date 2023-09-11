@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Test</title>
+    <link rel = "icon" href="../images/favicon.png"/>
+    <link rel="stylesheet" href="../styles/output.css"/>
+    <link rel="stylesheet" href="../styles/index.css"/>
+</head>
+<body>
+    <main id = "home-main">
+        <div id = "home-container">
+            <div id = "home-area">
+                <section class = "home-sections" id = "home-text-section">
+                    <div id = "home-texts-div">
+                        <div id = "home-title-div">
+                            <h1 class = "text-4xl" id = "home-title">Cadastro online</h1>
+                        </div>
+                        <div id = "home-subtitle-div">
+                            <p id = "home-subtitle">Conecte-se e compartilhe os bons momentos com as pessoas que fazem parte da sua vida.</p>
+                        </div>
+                        <div id = "home-login-button-div">
+                            <a href = "/login" id = "home-login-button-link">
+                                <button type = "button" id = "home-login-button"></button>
+                            </a>
+                        </div>
+                    </div>
+                    <div id = "home-signup-div">
+                        <span id = "home-signup">Não tem uma conta? <a href = "/signup" id = "home-signup-link">Cadastre-se</a></span>
+                    </div>
+                </section>
+                <section class = "home-sections" id = "home-image-section">
+                    <div id = "home-image-div">
+                        <div id = "home-image-mobile"></div>
+                        <!--<img id = "home-image" src = "../images/mobile/mobile(0).png"></img>-->
+                        <img id = "home-image" style = "background-image: url('./images/mobile/mobile(0).png')"></img>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src = "../scripts/mobileAnimation.js"></script>
+    <script>
+        const urlParameters = new URLSearchParams(window.location.search);
+        const errorFound = urlParameters.get("error");
+        console.error(errorFound);
+    </script>
+</body>
+</html>
