@@ -1,7 +1,7 @@
 {
-  "name": "login",
-  "version": "1.0.0",
-  "description": "Teste de login com Node.js",
+  "name": "login-node",
+  "version": "1.0.1",
+  "description": "Sistema de cadastro/login com Node.js, EJS, SQLite e Tailwind CSS",
   "main": "index.js",
   "scripts": {
     "test": "npm run dev",
