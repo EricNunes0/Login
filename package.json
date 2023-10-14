@@ -4,6 +4,7 @@
   "description": "Sistema de cadastro/login com Node.js, EJS, SQLite e Tailwind CSS",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "build": "node index.js",
     "test": "npm run dev",
     "dev": "nodemon index.js"
