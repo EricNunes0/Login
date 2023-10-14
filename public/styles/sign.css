@@ -1,25 +1,15 @@
 :root {
     --sign-area-background-color: #fafafa;
     --sign-text-inputs-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
-    --sign-radio-color: #aaa;/*rgb(101, 140, 197);*/
+    --sign-radio-color: #1fff62;/*rgb(101, 140, 197);*/
+    --input-outline-color: #1fff62;
+    --input-icon-size: 20px;
     --warning-icon-size: 20px;
 }
 
 * {
     margin: 0;
     padding: 0;
-}
-
-html, body {
-    background-size: 100% 100%;
-}
-
-img, svg {
-    -webkit-user-drag: none;
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
 }
 
 .sign-mains {
@@ -124,31 +114,59 @@ img, svg {
 }
 
 .sign-labels {
-    width: 100%;
-    color: #444;
+    color: #fff;
+    font-size: 18px;
 }
 .sign-labels.gender {
     font-size: 12px;
 }
 
 .sign-text-inputs {
-    background-color: #f7f7f7;
-    color: #444;
-    width: 225px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    width: 250px;
     height: 40px;
     padding: 5px 15px;
+    padding-left: calc(var(--input-icon-size) * 2);
     border-radius: 3px;
     box-shadow: var(--sign-text-inputs-shadow);
     -moz-box-shadow: var(--sign-text-inputs-shadow);
     -webkit-box-shadow: var(--sign-text-inputs-shadow);
+    outline: 2px solid rgba(0, 0, 0, 0.5);
     transition: all 0.3s;
 }
+.sign-text-inputs:hover {
+    outline: 2px solid #888;
+}
 .sign-text-inputs:focus {
-    outline: 1px solid #404040;
+    outline: 2px solid var(--input-outline-color);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    outline: 2px solid #1fff62;
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .sign-input-divs {
     position: relative;
+}
+
+/* Ícones dos inputs */
+.input-icons {
+    pointer-events: none;
+    width: var(--input-icon-size);
+    height: var(--input-icon-size);
+    position: absolute;
+    top: calc(50% - calc(var(--input-icon-size) / 2));
+    left: calc(0% + calc(var(--input-icon-size) * 0.5));
+    filter: contrast(0);
+    transition: all 0.3s;
+}
+.sign-text-inputs:focus ~ .input-icons {
+    filter: unset;
 }
 
 .input-warning-icons {
@@ -158,13 +176,13 @@ img, svg {
     top: calc(50% - calc(var(--warning-icon-size) / 2));
     left: calc(100% - calc(var(--warning-icon-size) * 1.5));
 }
-
 .input-warning-icons[class~="hide"] {
     display: none;
 }
 
 ::-webkit-calendar-picker-indicator {
-    background-image: url("../svgs/calendar.svg");
+    background-image: none;
+    /*background-image: url("../svgs/calendar.svg");*/
 }
 
 #sign-radio-option-div {
@@ -185,7 +203,7 @@ img, svg {
 
 input[type="radio"] {
     appearance: none;
-    background-color: #f7f7f7;
+    background-color: transparent;
     color: var(--sign-radio-color);
     cursor: pointer;
     display: grid;
@@ -196,6 +214,7 @@ input[type="radio"] {
     margin: 0;
     border: 2px solid var(--sign-radio-color);
     border-radius: 50%;
+    transition: all 0.3s;
     transform: translateY(-0.075em);
 }
 input[type="radio"]::before {
@@ -216,29 +235,32 @@ input[type="radio"]:focus {
 }
 
 .sign-submits {
-    width: 180px;
+    width: 250px;
     height: 48px;
-    background-color: #101010;
-    background-size: 1000% 100%;
+    background-color: #1fff62;
     color: #fff;
     font-size: 18px;
     border: 2px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 15px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 1rem;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px;
     transition: all 0.3s;
 }
 .sign-submits:hover {
-    background-position: 100% 100%;
+    filter: brightness(1.1);
 }
 
 .sign-redirect-divs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 15px;
 }
 
 .sign-redirects {
-    color: #404040;
-    font-size: 16px;
+    color: #f0f0f0;
+    font-size: 14px;
+    text-align: center;
 }
 
 .sign-redirect-links {
@@ -247,21 +269,33 @@ input[type="radio"]:focus {
 }
 
 .sign-warning-divs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
 }
 
 .sign-warnings {
+    color: #f04040;
     font-size: 14px;
     text-align: center;
-    display: block;
-    max-width: 80%;
-    margin: auto;
+    max-width: 250px;
+    text-shadow: 0px 0px 2px #f02020;
 }
 
 .sign-warning-links {
     font-weight: bold;
 }
 .sign-warning-links:hover {
+    text-decoration: underline;
+}
+
+/* Botões de trocar formulários */
+.open-form-buttons {
+    color: #1fff62;
+    font-weight: bold;
+}
+.open-form-buttons:hover {
     text-decoration: underline;
 }
 

@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Node</title>
-    <link rel = "icon" href = "../images/home.png"/>
+    <link rel = "icon" href = "../svgs/logo.svg"/>
     <link rel = "stylesheet" href = "../styles/output.css"/>
     <link rel = "stylesheet" href = "../styles/home.css"/>
+    <link rel = "stylesheet" href = "../styles/navigation.css"/>
 </head>
 <body>
+    <div id = "navigation-output"></div>
+    <script>
+        let navigation = `<%- include("navigation.ejs") %>`;
+        document.querySelector("#navigation-output").innerHTML = navigation;
+    </script>
     <main id = "home-main">
         <div id = "home-area">
             <section class = "home-area-divs" id = "home-image-div">

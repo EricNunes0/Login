@@ -35,14 +35,14 @@ app.use(session({
 }));
 
 app.get("/", (req, res, next) => {
-    res.sendFile(path.resolve(__dirname, "public/templates/index.html"));
+    res.render("index");
 });
 
 app.get("/login", (req, res, next) => {
-    res.render("login");
+    res.redirect("/");
 });
 
-app.post("/login/validate", async(req, res, next) => {
+app.post("/login", async(req, res, next) => {
     let body = req.body;
     
     let db = database.open();
@@ -53,13 +53,14 @@ app.post("/login/validate", async(req, res, next) => {
     db.get(query, (err, row) => {
         //console.log("🌐 Este é o resultado:", row);
         if(!row) {
-            res.render("login", {error: {
+            let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
+            res.render("index", {error: {
                 type: "\"EmailNotFound\"",
-                message: "\"O e-mail que você inseriu não está cadastrado! <a class = 'sign-warning-links' href = '/signup'>Crie uma nova conta</a>\""
+                message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
             }});
         } else {
             if(password !== row.password) {
-                res.render("login", {error: {
+                res.render("index", {error: {
                     type:"\"InvalidPassword\"",
                     message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
                 }});
@@ -75,10 +76,10 @@ app.post("/login/validate", async(req, res, next) => {
 });
 
 app.get("/signup", (req, res, next) => {
-    res.render("signup");
+    res.redirect("/");
 });
 
-app.post("/signup/validate", (req, res, next) => {
+app.post("/signup", (req, res, next) => {
     const body = req.body;
     const firstName = body.firstName;
     const lastName = body.lastName;
@@ -92,9 +93,10 @@ app.post("/signup/validate", (req, res, next) => {
     let query = `SELECT * FROM registers WHERE email = '${email}'`;
     db.get(query, (err, row) => {
         if(row) {
-            res.render("signup", {error: {
+            let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
+            res.render("index", {error: {
                 type: "\"EmailExists\"",
-                message: "\"O e-mail que você inseriu já está cadastrado! <a class = 'sign-warning-links' href = '/login'>Faça o login</a>\""
+                message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
             }});
         } else {
             db.run(`
@@ -124,6 +126,33 @@ app.get("/home", (req, res, next) => {
         return;
     };
     res.redirect("/");
+});
+
+app.get("/admin", (req, res, next) => {
+    let db = database.open();
+
+    let query = `SELECT * FROM registers`;
+    db.all(query, (err, rows) => {
+        console.log(rows);
+        res.render("admin", {registers: rows});
+    });
+    database.close(db);
+});
+
+app.post("/admin", (req, res, next) => {
+    let db = database.open();
+    let body = req.body;
+    let operation = body.operation;
+    if(operation == "DELETE") {
+        let ids = body.ids;
+        for(const id of ids) {
+            let query = `DELETE FROM registers WHERE ID = ${id}`;
+            db.get(query, (err, row) => {
+                console.log("DELETADO:", id);
+            });
+        };
+    }
+    database.close(db);
 });
 
 app.listen(process.env.PORT || port, () => {

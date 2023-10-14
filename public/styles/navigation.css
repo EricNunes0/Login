@@ -1,0 +1,54 @@
+:root {
+    --navigation-width: 100%;
+    --navigation-height: 60px;
+    --navigation-background-color: #fff;
+}
+
+#navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--navigation-width);
+    height: var(--navigation-height);
+    background-color: var(--navigation-background-color);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+}
+
+#navigation-grid {
+    height: 100%;
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-content: center;
+    align-content: center;
+}
+
+.navigation-divs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-divs:nth-child(1) {
+    grid-column: 1;
+}
+
+#home-div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#home-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#home-icon {
+    width: calc(var(--navigation-height) - 10px);
+    height: calc(var(--navigation-height) - 10px);
+    max-width: 40px;
+    max-height: 40px;
+}

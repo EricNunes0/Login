@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel = "icon" href = "../svgs/logo.svg"/>
+    <link rel = "stylesheet" href = "../styles/output.css"/>
+    <link rel="stylesheet" href="../styles/admin.css"/>
+    <script type = "text/javascript" src = "../scripts/admin/CreateTableData.js"></script>
+    <script type = "text/javascript" src = "../scripts/admin/CreateTableRow.js"></script>
+</head>
+<body>
+    <main class="closed" id = "controls-main">
+        <div class="closed" id = "controls-area" style = "transform: translateY(calc(var(--controls-button-size) + calc(var(--controls-button-margin) * 2))76);">
+            <div id = "controls-open-div">
+                <button type="button" id = "controls-open-button">
+                    <img class = "closed" id = "controls-open-image" src = "../svgs/arrow.svg"></img>
+                </button>
+            </div>
+            <div id = "controls-div">
+                <div class = "controls-buttons-divs">
+                    <button type="button" class="controls-buttons" id = "delete-data-button">
+                        <div class="controls-buttons-image-divs">
+                            <img class = "controls-buttons-images" src = "../svgs/garbage.svg"></img>
+                        </div>
+                        <div class="controls-buttons-text-divs">
+                            <span class="controls-buttons-texts">Excluir</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id = "admin-main">
+        <table id = "admin-table">
+            <tbody id = "table-tbody">
+                <tr id = "table-title-tr">
+                    <th class = "table-titles">ID</th>
+                    <th class = "table-titles">Primeiro nome</th>
+                    <th class = "table-titles">Último nome</th>
+                    <th class = "table-titles">Aniversário</th>
+                    <th class = "table-titles">Gênero</th>
+                    <th class = "table-titles">E-mail</th>
+                    <th class = "table-titles">Telefone</th>
+                    <th class = "table-titles">Senha</th>
+                </tr>
+                <script type="text/javascript">
+                    <% if(typeof registers !="undefined" && registers) { %>
+                        let registersLoaded = <%- JSON.stringify(registers) %>;
+                        console.table(registersLoaded);
+                        registersLoaded.forEach((reg) => {
+                            CreateTableRow({register: reg});
+                        });
+                    <% } %>
+                </script>
+            </tbody>
+        </table>
+    </main>
+    <script type="text/javascript" src = "../scripts/admin/deleteDataButton.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/openControls.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/trSelect.js"></script>
+</body>
+</html>

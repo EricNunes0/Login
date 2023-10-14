@@ -1,0 +1,175 @@
+:root {
+    --controls-open-height: 30px;
+    --controls-button-size: 100px;
+    --controls-button-margin: 10px;
+    --table-border-radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(180deg, #00000080, #000000f0), url("../images/scenaries/scenary(0).png");
+    background-size: 100% 100%;
+    background-repeat: repeat;
+}
+
+#admin-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#admin-table {
+    background-color: rgba(255,255,255,0.2);
+    padding: 0.5rem;
+    border: unset;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
+}
+
+.table-tr {
+    cursor: pointer;
+    height: 50px;
+    transition: all 0.1s;
+}
+.table-tr[class~="2"] {
+    background-color: #80808010;
+}
+.table-tr[class~="selected"] {
+    background-color: #2090ff10;
+    outline: 2px solid #2090ffa0;
+}
+
+#table-title-tr {
+    height: 50px;
+    background-color: rgb(20, 20, 20, 0.2);
+}
+
+.table-titles {
+    width: 80px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    text-wrap: nowrap;
+}
+
+.table-data {
+    color: #d0d0d0;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0px 20px;
+    text-align: left;
+    text-wrap: nowrap;
+}
+
+#controls-main {
+    position: fixed;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+}
+#controls-main[class~="closed"] {
+    pointer-events: none;
+    background-color: unset;
+}
+
+#controls-open-div {
+    pointer-events: all;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#controls-open-button {
+    padding: 10px;
+}
+
+#controls-open-image {
+    width: 52px;
+    height: 42px;
+    transition: all 0.3s;
+}
+#controls-open-image[class~="closed"] {
+    transform: rotate3d(1, 0, 0, 180deg);
+}
+
+#controls-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in;
+}
+#controls-area[class~="closed"] {
+}
+
+#controls-div {
+    width: 100%;
+    height: calc(var(--controls-button-size) + calc(var(--controls-button-margin) * 2));
+    background-color: rgba(50, 50, 50, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls-buttons {
+    width: var(--controls-button-size);
+    height: var(--controls-button-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.controls-buttons:hover {
+    transform: scale(1.20);
+}
+
+.controls-buttons-images {
+    width: 40px;
+    height: 40px;
+}
+
+.controls-buttons-texts {
+    color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+    #admin-table {
+        width: 100%;
+    }
+
+    .table-tr {
+        width: 100%;
+    }
+
+    .table-titles {
+        font-size: 8px;
+        width: calc(100vw / 8);
+        padding: unset;
+    }
+
+    .table-data {
+        width: calc(100vw / 8);
+        max-width: calc(100vw / 8);
+        overflow: auto;
+    }
+}
