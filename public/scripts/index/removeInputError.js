@@ -1,3 +1,3 @@
 function removeInputError(input) {
-    input.style.outline = "none";
+    input.classList.remove("error");
 };

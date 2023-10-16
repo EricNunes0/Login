@@ -9,6 +9,8 @@ const database = require("./src/database");
 const register = require("./src/register");
 const dotenv = require("dotenv").config();
 const createCookie = require("./src/createCookie");
+const signController = require("./src/validation/signupController");
+const signupValidator = require("./src/validation/signupValidator");
 
 const app = express();
 const port = 3001;
@@ -79,39 +81,7 @@ app.get("/signup", (req, res, next) => {
     res.redirect("/");
 });
 
-app.post("/signup", (req, res, next) => {
-    const body = req.body;
-    const firstName = body.firstName;
-    const lastName = body.lastName;
-    const date = body.date;
-    const gender = body.gender;
-    const email = body.email;
-    const phone = body.phone;
-    const password = body.password;
-    let db = database.open();
-
-    let query = `SELECT * FROM registers WHERE email = '${email}'`;
-    db.get(query, (err, row) => {
-        if(row) {
-            let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
-            res.render("index", {error: {
-                type: "\"EmailExists\"",
-                message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
-            }});
-        } else {
-            db.run(`
-                INSERT INTO registers (firstName, lastName, date, gender, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [firstName, lastName, date, gender, email, phone, password]
-            );
-            createCookie(res, `firstName`, firstName);
-            createCookie(res, `lastName`, lastName);
-            createCookie(res, `gender`, gender);
-            res.redirect("../home");
-        };
-    });
-
-    database.close(db);
-});
+app.post("/signup", signupValidator.form, signController.signupController);
 
 app.get("/home", (req, res, next) => {
     function CookieExists(cookie) {

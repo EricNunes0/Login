@@ -1,8 +1,8 @@
 :root {
     --sign-area-background-color: #fafafa;
     --sign-text-inputs-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
-    --sign-radio-color: #1fff62;/*rgb(101, 140, 197);*/
-    --input-outline-color: #1fff62;
+    --sign-radio-color: #20ff60;/*rgb(101, 140, 197);*/
+    --input-outline-color: #20ff60;
     --input-icon-size: 20px;
     --warning-icon-size: 20px;
 }
@@ -117,8 +117,27 @@
     color: #fff;
     font-size: 18px;
 }
+
+/* Divs das labels de gênero */
+.sign-labels-gender-divs {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-2px);
+}
+
 .sign-labels.gender {
-    font-size: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+.sign-labels.gender:hover {
+    color: #20ff60;
+}
+
+.sign-input-divs {
+    position: relative;
 }
 
 .sign-text-inputs {
@@ -144,14 +163,14 @@
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus {
-    outline: 2px solid #1fff62;
+    outline: 2px solid #20ff60;
     -webkit-text-fill-color: #fff;
     -webkit-box-shadow: 0 0 0px 1000px transparent inset;
     transition: background-color 5000s ease-in-out 0s;
 }
 
-.sign-input-divs {
-    position: relative;
+.sign-text-inputs[class~="error"] {
+    outline: 2px solid #f02020;
 }
 
 /* Ícones dos inputs */
@@ -167,6 +186,10 @@ input:-webkit-autofill:focus {
 }
 .sign-text-inputs:focus ~ .input-icons {
     filter: unset;
+}
+
+.sign-text-inputs[class~="error"] ~ .input-icons {
+    filter: invert(1) hue-rotate(45deg) brightness(1.5);
 }
 
 .input-warning-icons {
@@ -194,11 +217,23 @@ input:-webkit-autofill:focus {
 }
 
 .sign-radio-divs {
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 5px;
+    padding: 0px 3px 0px 3px;
+    border-radius: 3px;
+    outline: 2px solid rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+}
+.sign-radio-divs:hover {
+    outline: 2px solid #20ff60;
+}
+.sign-radio-divs[class~="error"] {
+    outline: 2px solid #f02020;
 }
 
 input[type="radio"] {
@@ -237,7 +272,7 @@ input[type="radio"]:focus {
 .sign-submits {
     width: 250px;
     height: 48px;
-    background-color: #1fff62;
+    background-color: #20ff60;
     color: #fff;
     font-size: 18px;
     border: 2px;
@@ -292,7 +327,7 @@ input[type="radio"]:focus {
 
 /* Botões de trocar formulários */
 .open-form-buttons {
-    color: #1fff62;
+    color: #20ff60;
     font-weight: bold;
 }
 .open-form-buttons:hover {

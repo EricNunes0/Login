@@ -3,24 +3,24 @@ const signupForm = document.querySelector("#signup-form");
 
 const signupFormInputs = [
     {
-        "query": "#first-name",
-        "warning": "Você precisa informar o seu primeiro nome!"
+        "query": "#firstName",
+        "validation": () => signupName(`first`)
     },
     {
-        "query": "#last-name",
-        "warning": "Você precisa informar o seu último nome!"
+        "query": "#lastName",
+        "validation": () => signupName(`last`)
     },
     {
         "query": "#date",
-        "warning": "Você precisa informar a sua data de nascimento!"
+        "validation": () => signupDate()
     },
     {
         "warning": "Você precisa informar o seu gênero!",
-        "validation": () => radioValidate(["gender"])
+        "validation": () => signupGender()
     },
     {
         "query": "#signup-email",
-        "warning": "Você precisa informar o seu e-mail!"
+        "validation": () => signupEmail()
     },
     {
         "query": "#phone",
@@ -43,7 +43,11 @@ const signupFormInputs = [
 signupButton.addEventListener("click", (e) => {
     e.preventDefault();
     for(const input of signupFormInputs) {
-        if(input.query) {
+        if(input.query && input.validation !== undefined) {
+            if(input.validation() === false) {
+                return;
+            };
+        } else if(input.query) {
             const inputQuery = document.querySelector(input.query);
             const value = inputQuery.value;
             if(!value) {
@@ -52,12 +56,12 @@ signupButton.addEventListener("click", (e) => {
                 return;
             };
             removeInputError(inputQuery);
-        } else {
-            if(input.validation !== undefined) {
-                if(input.validation() === false) {
+        } else if(input.validation !== undefined) {
+            if(input.validation() === false) {
+                if(input.warning) {
                     warningAlert(input.warning);
-                    return;
                 };
+                return;
             };
         };
     };

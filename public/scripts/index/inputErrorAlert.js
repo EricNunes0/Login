@@ -1,3 +1,3 @@
 function inputErrorAlert(input) {
-    input.style.outline = "2px solid #f02020";
+    input.classList.add("error");
 };
