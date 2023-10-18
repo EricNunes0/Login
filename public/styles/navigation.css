@@ -1,17 +1,28 @@
 :root {
     --navigation-width: 100%;
-    --navigation-height: 60px;
-    --navigation-background-color: #fff;
+    --navigation-height: 80px;
+    --navigation-icon-width: 30px;
+    --navigation-icon-height: 35px;
+    --navigation-background-color: rgba(0, 0, 0, 0.2);
 }
 
-#navigation {
+#navigation-output {
     position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
     width: var(--navigation-width);
     height: var(--navigation-height);
     background-color: var(--navigation-background-color);
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
+}
+
+#navigation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #navigation-grid {
@@ -33,11 +44,12 @@
     grid-column: 1;
 }
 
-#home-div {
+#navigation-button-div {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 100px;
 }
 
 #home-link {
@@ -46,9 +58,36 @@
     align-items: center;
 }
 
-#home-icon {
-    width: calc(var(--navigation-height) - 10px);
-    height: calc(var(--navigation-height) - 10px);
-    max-width: 40px;
-    max-height: 40px;
+#navigation-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#navigation-icon {
+    width: var(--navigation-icon-width);
+    height: var(--navigation-icon-height);
+}
+
+#navigation-text {
+    transform: translateX(calc(-50% - 10px)) perspective(0px) scaleX(0);
+    color: #fff;
+    font-size: 24px;
+    transition: all 0.3s ease-in-out;
+}
+
+#navigation-button:hover > #navigation-text {
+    transform: translateX(0px) perspective(500px) scaleX(1);
+}
+
+@media screen and (max-width: 768px) {
+    #navigation-output {
+        height: 60px;
+    }
+
+    #navigation-button-div {
+        margin-left: 15px;
+    }
 }

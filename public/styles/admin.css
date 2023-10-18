@@ -1,6 +1,7 @@
 :root {
+    --admin-main-background-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9));
     --controls-open-height: 30px;
-    --controls-button-size: 100px;
+    --controls-button-size: 90px;
     --controls-button-margin: 10px;
     --table-border-radius: 10px;
 }
@@ -11,14 +12,46 @@
 }
 
 html, body {
-    width: 100vw;
-    height: 100vh;
-    background-image: linear-gradient(180deg, #00000080, #000000f0), url("../images/scenaries/scenary(0).png");
-    background-size: 100% 100%;
-    background-repeat: repeat;
+    background-color: #202a30;
 }
 
 #admin-main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../images/scenaries/scenary(0).png");
+    background-size: 100% 100%;
+    background-repeat: repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    animation: AdminMainBackground 10s linear infinite;
+}
+@keyframes AdminMainBackground {
+    33% {
+        background-image: url("../images/scenaries/scenary(1).png");
+    }
+    67% {
+        background-image: url("../images/scenaries/scenary(2).png");
+    }
+}
+
+#admin-main-background {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--admin-main-background-gradient);
+}
+
+#admin-area {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -27,7 +60,7 @@ html, body {
 }
 
 #admin-table {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(20, 25, 30, 0.9);
     padding: 0.5rem;
     border: unset;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 5px;
@@ -39,7 +72,7 @@ html, body {
     transition: all 0.1s;
 }
 .table-tr[class~="2"] {
-    background-color: #80808010;
+    background-color: rgba(128, 128, 128, 0.1);
 }
 .table-tr[class~="selected"] {
     background-color: #2090ff10;
@@ -48,23 +81,25 @@ html, body {
 
 #table-title-tr {
     height: 50px;
-    background-color: rgb(20, 20, 20, 0.2);
+    background-color: rgb(20, 25, 30, 1);
 }
 
 .table-titles {
     width: 80px;
     padding: 10px 20px;
     color: #fff;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
     text-align: left;
     text-wrap: nowrap;
 }
 
 .table-data {
-    color: #d0d0d0;
+    color: #f0f0f0;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0px 20px;
     text-align: left;
     text-wrap: nowrap;
@@ -116,16 +151,15 @@ html, body {
     align-items: center;
     transition: all 0.3s ease-in;
 }
-#controls-area[class~="closed"] {
-}
 
 #controls-div {
     width: 100%;
     height: calc(var(--controls-button-size) + calc(var(--controls-button-margin) * 2));
-    background-color: rgba(50, 50, 50, 0.3);
+    background-color: rgba(20, 25, 30, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
 }
 
 .controls-buttons {
@@ -135,21 +169,41 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
+    outline: 2px solid #fff;
     transition: all 0.3s;
 }
-.controls-buttons:hover {
-    transform: scale(1.20);
+.controls-buttons:hover, .controls-buttons:focus {
+    outline: 2px solid #20ff60;
+    transform: scale(1.1);
 }
 
 .controls-buttons-images {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    filter: grayscale(1) brightness(2);
+    transition: all 0.3s;
+}
+
+.controls-buttons:hover > .controls-buttons-images,
+.controls-buttons:hover > .controls-buttons-image-divs > .controls-buttons-images,
+.controls-buttons:focus > .controls-buttons-images,
+.controls-buttons:focus > .controls-buttons-image-divs > .controls-buttons-images {
+    filter: unset;
 }
 
 .controls-buttons-texts {
     color: #fff;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.controls-buttons:hover > .controls-buttons-texts,
+.controls-buttons:hover > .controls-buttons-text-divs > .controls-buttons-texts,
+.controls-buttons:focus > .controls-buttons-texts,
+.controls-buttons:focus > .controls-buttons-text-divs > .controls-buttons-texts {
+    color: #20ff60;
 }
 
 @media screen and (max-width: 480px) {

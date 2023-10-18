@@ -168,6 +168,10 @@ input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px transparent inset;
     transition: background-color 5000s ease-in-out 0s;
 }
+/* Senhas */
+.sign-text-inputs[class~="password"] {    
+    padding-right: calc(var(--input-icon-size) * 2);
+}
 
 .sign-text-inputs[class~="error"] {
     outline: 2px solid #f02020;
@@ -191,7 +195,6 @@ input:-webkit-autofill:focus {
 .sign-text-inputs[class~="error"] ~ .input-icons {
     filter: invert(1) hue-rotate(45deg) brightness(1.5);
 }
-
 .input-warning-icons {
     width: var(--warning-icon-size);
     height: var(--warning-icon-size);
@@ -267,6 +270,39 @@ input[type="radio"]:checked::before {
 input[type="radio"]:focus {
     /*outline: max(2px, 0.15em) solid currentColor;*/
     outline-offset: max(2px, 0.15em);
+}
+
+/* Botões de revelar senha */
+.password-reveal-buttons {
+    position: absolute;
+    top: calc(50% - calc(var(--input-icon-size) / 2));
+    left: calc(100% - calc(var(--input-icon-size) * 1.5));
+    width: var(--input-icon-size);
+    height: var(--input-icon-size);
+    border: unset;
+    transition: all 0.3s;
+}
+
+/* Ícones dos botões de revelar senha */
+.password-reveal-icons {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    background-image: url("../svgs/index/forms/passwordHide.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 50%;
+    border: unset;
+    border-radius: 2px;
+    filter: invert(0.7);
+    transition: all 0.3s;
+}
+.password-reveal-buttons:hover > .password-reveal-icons {
+    filter: invert(1);
+}
+
+.sign-text-inputs[type~="text"] ~ .password-reveal-buttons > .password-reveal-icons {
+    background-image: url("../svgs/index/forms/passwordShow.svg");
 }
 
 .sign-submits {

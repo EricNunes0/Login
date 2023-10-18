@@ -15,6 +15,8 @@ function CreateTableRow({register}) {
     tr.appendChild(CreateTableData({dataname: "email", data: register.email}));
     tr.appendChild(CreateTableData({dataname: "phone", data: register.phone}));
     tr.appendChild(CreateTableData({dataname: "password", data: register.password}));
+    tr.appendChild(CreateTableData({dataname: "admin", data: register.admin}));
+    tr.appendChild(CreateTableData({dataname: "icon", data: register.icon}));
 
     tbody.appendChild(tr);
 };

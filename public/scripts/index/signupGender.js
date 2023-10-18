@@ -13,10 +13,8 @@ function signupGenderRemoveAlert() {
 };
 
 function signupGender() {
-    
     let inputName = ["gender"];
     let radioCheck = document.querySelector(`input[name="${inputName}"]:checked`) ? true : false;
-    console.log("genderCheck", radioCheck);
     if(!radioCheck) {
         signupGenderAddAlert();
         warningAlert("Você precisa informar o seu gênero!");

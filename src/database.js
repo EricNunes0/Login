@@ -6,13 +6,11 @@ module.exports.open = () => {
         if(e) {
             throw new Error(e);
         };
-        console.log("Conectado ao banco de dados!");
-        register.CreateTable(db);
     });
     return db;
 };
 
 module.exports.close = (db) => {
     db.close();
-    console.log("Conexão com banco de dados encerrada!");
+    //console.log("Conexão com banco de dados encerrada!");
 };

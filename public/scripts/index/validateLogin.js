@@ -3,12 +3,10 @@ const loginForm = document.querySelector("#login-form");
 
 const loginFormInputs = [
     {
-        "query": "#login-email",
-        "warning": "Você precisa informar o seu e-mail!"
+        "validation": () => loginEmailValidate()
     },
     {
-        "query": "#login-password",
-        "warning": "Você precisa informar a sua senha!"
+        "validation": () => loginPasswordValidate()
     }
 ];
 
@@ -16,16 +14,11 @@ loginButton.addEventListener("click", (e) => {
     e.preventDefault();
     removeInputErrors();
     for(const input of loginFormInputs) {
-        if(input.query) {
-            const inputQuery = document.querySelector(input.query);
-            const value = inputQuery.value;
-            if(!value) {
-                inputErrorAlert(inputQuery);
-                loginErrorAlert(input.warning);
+        if(input.validation !== undefined) {
+            if(input.validation() === false) {
                 return;
             };
-            removeInputError(inputQuery);
-        };
+        }
     };
     if(loginForm) {
         loginForm.submit();

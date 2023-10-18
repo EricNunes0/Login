@@ -1,9 +1,9 @@
 const database = require("../database");
 const { validationResult, matchedData } = require("express-validator");
+const createCookie = require("../cookies/createCookie");
 
 exports.signupController = (req, res, next) => {
     const body = req.body;
-    console.log(body)
     const firstName = body.firstName;
     const lastName = body.lastName;
     const date = body.date;
@@ -30,8 +30,7 @@ exports.signupController = (req, res, next) => {
             }
         });
     } else {
-        var inputData = matchedData(req);  
-        console.log("Tá aprovado!");
+        var inputData = matchedData(req);
     }
 
     let query = `SELECT * FROM registers WHERE email = '${email}'`;
@@ -45,8 +44,8 @@ exports.signupController = (req, res, next) => {
             }});
         } else {
             db.run(`
-                INSERT INTO registers (firstName, lastName, date, gender, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [firstName, lastName, date, gender, email, phone, password]
+                INSERT INTO registers (firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+                [firstName, lastName, date, gender, email, phone, password, false]
             );
             createCookie(res, `firstName`, firstName);
             createCookie(res, `lastName`, lastName);

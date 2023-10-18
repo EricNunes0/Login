@@ -7,10 +7,16 @@
     <link rel = "icon" href="../svgs/logo.svg"/>
     <link rel="stylesheet" href="../styles/output.css"/>
     <link rel="stylesheet" href="../styles/index.css"/>
+    <link rel = "stylesheet" href = "../styles/navigation.css"/>
     <link rel="stylesheet" href="../styles/sign.css"/>
 </head>
 <body>
     <main id = "home-main">
+        <div id = "navigation-output"></div>
+        <script>
+            let navigation = `<%- include("navigation.ejs") %>`;
+            document.querySelector("#navigation-output").innerHTML = navigation;
+        </script>
         <div id = "home-background">
             <div id = "home-background-div"></div>
         </div>
@@ -51,7 +57,7 @@
                         <div class = "form-title-divs">
                             <h1 class = "form-titles">Login</h1>
                         </div>
-                        <form class = "sign-forms" id = "login-form" method="post" action ="/login">
+                        <form class = "sign-forms" id = "login-form" method="post" action ="/login" enctype="application/x-www-form-urlencoded">
                             <div class = "sign-grid-divs" id = "sign-grid-1">
                                 <label class = "sign-labels" for = "login-email">E-mail:</label>
                                 <div class = "sign-input-divs">
@@ -63,9 +69,11 @@
                             <div class = "sign-grid-divs" id = "sign-grid-3">
                                 <label class = "sign-labels" for = "login-password">Senha:</label>
                                 <div class = "sign-input-divs">
-                                    <input type = "password" class = "sign-text-inputs" name = "password" id = "login-password" placeholder = "Senha"/>
+                                    <input type = "password" class = "sign-text-inputs password" name = "password" id = "login-password" placeholder = "Senha"/>
                                     <img class = "input-icons" id = "login-password-icon" src = "../svgs/index/forms/password.svg"></img>
-                                    <img class = "input-warning-icons hide" id = "login-password-warning" src = "../images/warning.png">
+                                    <button type = "button" class = "password-reveal-buttons" onclick = "passwordReveal('login-password')">
+                                        <img class = "password-reveal-icons"></img>
+                                    </button>
                                 </div>
                             </div>
                             <div class = "sign-grid-divs" id = "sign-grid-5">
@@ -143,22 +151,28 @@
                             <div class = "sign-grid-divs" id = "sign-grid-6">
                                 <label class = "sign-labels" for = "phone">Telefone:</label>
                                 <div class = "sign-input-divs">
-                                    <input type = "tel" class = "sign-text-inputs" name = "phone" id = "phone"/>
+                                    <input type = "tel" class = "sign-text-inputs" name = "phone" id = "phone" maxlength="14" placeholder="(__)_____-____"/>
                                     <img class = "input-icons" id = "signup-phone-icon" src = "../svgs/index/forms/phone.svg"></img>
                                 </div>
                             </div>
                             <div class = "sign-grid-divs" id = "sign-grid-7">
                                 <label class = "sign-labels" for = "signup-password">Senha:</label>
                                 <div class = "sign-input-divs">
-                                    <input type = "password" class = "sign-text-inputs" name = "password" id = "signup-password"/>
+                                    <input type = "password" class = "sign-text-inputs password" name = "password" id = "signup-password"/>
                                     <img class = "input-icons" id = "signup-password-icon" src = "../svgs/index/forms/password.svg"></img>
+                                    <button type = "button" class = "password-reveal-buttons" onclick = "passwordReveal('signup-password')">
+                                        <img class = "password-reveal-icons"></img>
+                                    </button>
                                 </div>
                             </div>
                             <div class = "sign-grid-divs" id = "sign-grid-8">
                                 <label class = "sign-labels" for = "password-validate">Verificar senha:</label>
                                 <div class = "sign-input-divs">
-                                    <input type = "password" class = "sign-text-inputs" id = "password-validate"/>
+                                    <input type = "password" class = "sign-text-inputs password" id = "password-validate"/>
                                     <img class = "input-icons" id = "signup-password-validade-icon" src = "../svgs/index/forms/password.svg"></img>
+                                    <button type = "button" class = "password-reveal-buttons" onclick = "passwordReveal('password-validate')">
+                                        <img class = "password-reveal-icons"></img>
+                                    </button>
                                 </div>
                             </div>
                             <div class = "sign-grid-divs" id = "sign-grid-9">
@@ -187,19 +201,26 @@
     <script type="text/javascript" src = "../scripts/index/hideFormLogin.js"></script>
     <script type="text/javascript" src = "../scripts/index/hideFormSignup.js"></script>
     <script type="text/javascript" src = "../scripts/index/inputErrorAlert.js"></script>
+    <script type="text/javascript" src = "../scripts/index/loginEmailValidate.js"></script>
     <script type="text/javascript" src = "../scripts/index/loginErrorAlert.js"></script>
+    <script type="text/javascript" src = "../scripts/index/loginPasswordValidate.js"></script>
     <script type="text/javascript" src = "../scripts/index/mobileAnimation.js"></script>
     <script type="text/javascript" src = "../scripts/index/mobileRotate.js"></script>
     <script type="text/javascript" src = "../scripts/index/openForms.js"></script>
+    <script type="text/javascript" src = "../scripts/index/passwordHide.js"></script>
+    <script type="text/javascript" src = "../scripts/index/passwordReveal.js"></script>
+    <script type="text/javascript" src = "../scripts/index/passwordShow.js"></script>
     <script type="text/javascript" src = "../scripts/index/passwordValidate.js"></script>
     <script type="text/javascript" src = "../scripts/index/removeInputError.js"></script>
     <script type="text/javascript" src = "../scripts/index/removeInputErrors.js"></script>
     <script type="text/javascript" src = "../scripts/index/showFormLogin.js"></script>
     <script type="text/javascript" src = "../scripts/index/showFormSignup.js"></script>
     <script type="text/javascript" src = "../scripts/index/signupDate.js"></script>
-    <script type="text/javascript" src = "../scripts/index/signupEmail.js"></script>
+    <script type="text/javascript" src = "../scripts/index/signupEmailValidate.js"></script>
     <script type="text/javascript" src = "../scripts/index/signupGender.js"></script>
     <script type="text/javascript" src = "../scripts/index/signupName.js"></script>
+    <script type="text/javascript" src = "../scripts/index/signupPassword.js"></script>
+    <script type="text/javascript" src = "../scripts/index/signupPhone.js"></script>
     <script type="text/javascript" src = "../scripts/index/titleWrite.js"></script>
     <script type="text/javascript" src = "../scripts/index/validateLogin.js"></script>
     <script type="text/javascript" src = "../scripts/index/validateSignup.js"></script>
@@ -208,7 +229,6 @@
         const loginEmail = document.querySelector("#login-email");
         const loginEmailWarning = document.querySelector("#login-email-warning");
         const loginPassword = document.querySelector("#login-password");
-        const loginPasswordWarning = document.querySelector("#login-password-warning");
         const loginWarning = document.querySelector("#login-warning");
         
         const signupEmail = document.querySelector("#signup-email");
@@ -229,24 +249,39 @@
             }
             if(errorType == "InvalidPassword") {
                 inputErrorAlert(loginPassword);
-                loginPasswordWarning.classList.remove("hide");
                 loginWarning.innerHTML = errorMessage;
                 callLoginForm();
             }
             /* Cadastro */
             if(errorType == "signupValidation") {
-                
                 <% if(typeof error.key !="undefined" && error.key) { %>
                     var errorKey = <%- error.key %>;
                 <% } %>
-                const keyInput = document.querySelector(`#${errorKey}`);
+                const keyInput = document.querySelector(`#${errorKey.replace("email", "signup-email").replace("password", "signup-password")}`);
                 if(keyInput) {
                     console.warn(`${errorKey} inválido!`);
                     inputErrorAlert(keyInput);
                     callSignupForm();
                     signupWarning.innerHTML = errorMessage;
                 } else {
-                    console.error(`input do ${errorKey} não encontrado!`);
+                    callSignupForm();
+                    console.error(`Input de ${errorKey} não encontrado!`);
+                };
+            };
+            /* Login */
+            if(errorType == "loginValidation") {
+                <% if(typeof error.key !="undefined" && error.key) { %>
+                    var errorKey = <%- error.key %>;
+                <% } %>
+                const keyInput = document.querySelector(`#${errorKey.replace("email", "login-email").replace("password", "login-password")}`);
+                if(keyInput) {
+                    console.warn(`${errorKey} inválido!`);
+                    inputErrorAlert(keyInput);
+                    callLoginForm();
+                    loginWarning.innerHTML = errorMessage;
+                } else {
+                    callLoginForm();
+                    console.error(`Input de ${errorKey} não encontrado!`);
                 };
             };
             if(errorType == "EmailExists") {

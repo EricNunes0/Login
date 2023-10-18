@@ -3,22 +3,25 @@ const axios = require("axios");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const path = require("path");
-const session = require("express-session")
+const session = require("express-session");
+const { v4: uuidv4 } = require("uuid");
 const database = require("./src/database");
 const register = require("./src/register");
 const dotenv = require("dotenv").config();
-const createCookie = require("./src/createCookie");
+const createCookie = require("./src/cookies/createCookie");
+const getCookie = require("./src/cookies/getCookie");
+const loginController = require("./src/validation/loginController");
+const loginValidator = require("./src/validation/loginValidator");
 const signController = require("./src/validation/signupController");
 const signupValidator = require("./src/validation/signupValidator");
 
 const app = express();
 const port = 3001;
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static("public"));
@@ -37,6 +40,8 @@ app.use(session({
 }));
 
 app.get("/", (req, res, next) => {
+    //const id = uuidv4(); // Gerar id aleatório para as sessões
+    //let firstName = getCookie(req, "firstName"); // Buscar cookie
     res.render("index");
 });
 
@@ -44,38 +49,7 @@ app.get("/login", (req, res, next) => {
     res.redirect("/");
 });
 
-app.post("/login", async(req, res, next) => {
-    let body = req.body;
-    
-    let db = database.open();
-    
-    const email = body.email;
-    const password = body.password;
-    let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1`;
-    db.get(query, (err, row) => {
-        //console.log("🌐 Este é o resultado:", row);
-        if(!row) {
-            let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
-            res.render("index", {error: {
-                type: "\"EmailNotFound\"",
-                message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
-            }});
-        } else {
-            if(password !== row.password) {
-                res.render("index", {error: {
-                    type:"\"InvalidPassword\"",
-                    message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
-                }});
-            } else {
-                createCookie(res, `firstName`, row.firstName);
-                createCookie(res, `lastName`, row.lastName);
-                createCookie(res, `gender`, row.gender);
-                res.redirect("../home");
-            };
-        };
-    });
-    database.close(db);
-});
+app.post("/login", loginValidator.form, loginController.loginController);
 
 app.get("/signup", (req, res, next) => {
     res.redirect("/");
@@ -113,6 +87,11 @@ app.post("/admin", (req, res, next) => {
     let db = database.open();
     let body = req.body;
     let operation = body.operation;
+    if(operation == "CreateTable") {
+        register.CreateTable(db);
+    } else if(operation == "DropTable") {
+        register.DropTable(db);
+    }
     if(operation == "DELETE") {
         let ids = body.ids;
         for(const id of ids) {
@@ -127,7 +106,7 @@ app.post("/admin", (req, res, next) => {
 
 app.listen(process.env.PORT || port, () => {
     let db = database.open();
-    register.CreateTable(db);
+    register.SelectEntireTable(db);
     database.close(db);
     console.log(`Servidor iniciado na porta ${port}!`);
 });
