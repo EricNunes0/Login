@@ -107,8 +107,5 @@ app.post("/admin", (req, res, next) => {
 });
 
 app.listen(process.env.PORT || port, () => {
-    let db = database.open();
-    register.SelectEntireTable(db);
-    database.close(db);
     console.log(`Servidor iniciado na porta ${port}!`);
 });
