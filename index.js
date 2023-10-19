@@ -16,7 +16,7 @@ const signController = require("./src/validation/signupController");
 const signupValidator = require("./src/validation/signupValidator");
 
 const app = express();
-const port = 3001;
+const port = 3001 || process.env.PORT;
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -73,35 +73,37 @@ app.get("/home", (req, res, next) => {
 });
 
 app.get("/admin", (req, res, next) => {
-    let db = database.open();
-
-    let query = `SELECT * FROM registers`;
-    db.all(query, (err, rows) => {
-        console.log(rows);
-        res.render("admin", {registers: rows});
+    const connection = database.open();
+    connection.connect(function(e) {
+        if(e) {throw new Error(e)};
+        let query = `SELECT * FROM registers;`;
+        connection.query(query, (err, rows) => {
+            database.close(connection);
+            res.render("admin", {registers: rows});
+        });
     });
-    database.close(db);
 });
 
 app.post("/admin", (req, res, next) => {
-    let db = database.open();
     let body = req.body;
     let operation = body.operation;
     if(operation == "CreateTable") {
-        register.CreateTable(db);
+        const connection = database.open();
+        register.CreateTable(connection);
     } else if(operation == "DropTable") {
-        register.DropTable(db);
-    }
-    if(operation == "DELETE") {
+        const connection = database.open();
+        register.DropTable(connection);
+    } else if(operation == "Delete") {
+        const connection = database.open();
         let ids = body.ids;
-        for(const id of ids) {
-            let query = `DELETE FROM registers WHERE ID = ${id}`;
-            db.get(query, (err, row) => {
-                console.log("DELETADO:", id);
+        console.log(ids);
+        connection.connect(function(e) {
+            let query = `DELETE FROM registers WHERE ID IN (${ids})`;
+            connection.query(query, (err, row) => {
+                console.log("DELETADOS:", ids);
             });
-        };
+        });
     }
-    database.close(db);
 });
 
 app.listen(process.env.PORT || port, () => {

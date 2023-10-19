@@ -1,16 +1,19 @@
 const database = require("sqlite3").verbose();
-const register = require("./register");
+const mysql = require("mysql");
+const dotenv = require("dotenv").config();
 
 module.exports.open = () => {
-    const db = new database.Database("./registers.db", (e) => {
-        if(e) {
-            throw new Error(e);
-        };
+    const connection = mysql.createConnection({
+        host: process.env.HOST,
+        database: process.env.DATABASE_NAME,
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD
     });
-    return db;
+    console.log("〔🟢〕Conexão com banco de dados iniciada!");
+    return connection;
 };
 
-module.exports.close = (db) => {
-    db.close();
-    //console.log("Conexão com banco de dados encerrada!");
+module.exports.close = (connection) => {
+    connection.end();
+    console.log("〔🔴〕Conexão com banco de dados encerrada!");
 };

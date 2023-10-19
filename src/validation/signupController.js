@@ -11,7 +11,6 @@ exports.signupController = (req, res, next) => {
     const email = body.email;
     const phone = body.phone;
     const password = body.password;
-    let db = database.open();
 
     /* Validação */
     const errors = validationResult(req);
@@ -33,26 +32,29 @@ exports.signupController = (req, res, next) => {
         var inputData = matchedData(req);
     }
 
-    let query = `SELECT * FROM registers WHERE email = '${email}'`;
-    db.get(query, (err, row) => {
-        if(row) {
-            console.log("Atenção");
-            let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
-            res.render("index", {error: {
-                type: "\"EmailExists\"",
-                message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
-            }});
-        } else {
-            db.run(`
-                INSERT INTO registers (firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-                [firstName, lastName, date, gender, email, phone, password, false]
-            );
-            createCookie(res, `firstName`, firstName);
-            createCookie(res, `lastName`, lastName);
-            createCookie(res, `gender`, gender);
-            res.redirect("../home");
-        };
+    
+    const connection = database.open();
+    connection.connect(function(e) {
+        let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
+        connection.query(query, (err, row) => {
+            console.log(query, row.length)
+            if(row.length != 0) {
+                let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
+                res.render("index", {error: {
+                    type: "\"EmailExists\"",
+                    message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
+                }});
+            } else {
+                connection.query(`
+                    INSERT INTO registers (firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+                    [firstName, lastName, date, gender, email, phone, password, false]
+                );
+                createCookie(res, `firstName`, firstName);
+                createCookie(res, `lastName`, lastName);
+                createCookie(res, `gender`, gender);
+                res.redirect("../home");
+            };
+            database.close(connection);
+        });
     });
-
-    database.close(db);
 };

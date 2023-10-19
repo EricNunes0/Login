@@ -21,14 +21,17 @@
                 <img id = "home-image" src = "../images/welcome.png"></img>
             </section>
             <section class = "home-area-divs" id = "home-texts-div">
+                <div id = "home-user-icon-div">
+                    <img id = "home-user-icon" src = "https://cdn-icons-png.flaticon.com/512/9131/9131529.png"></img>
+                </div>
                 <% if (user) { %>
-                    <h2>Seja 
+                    <h1 id = "welcome-message">
                         <% if (user.gender == "M") {%>
-                            bem-vindo<%}%><% if (user.gender == "F") {%>bem-vinda<%}%><% if (user.gender == "O") {%>bem-vindo(a)
-                        <%}%>,</h2>
-                    <h1 class = "text-4xl"><%= user.firstName %> <%= user.lastName %></h1>
-                <% } %>
-                <h2 class = "text-lg">Você está online!</h2>
+                            Bem-vindo<%}%><% if (user.gender == "F") {%>Bem-vinda<%}%><% if (user.gender == "O") {%>Bem-vindo(a)
+                        <%}%>,
+                        <%= user.firstName %> <%= user.lastName %></h1>
+                        <% } %>
+                <p id = "home-online-text">Você está online!</p>
                 <div id = "home-logout-button-div">
                     <a href = "/" id = "home-logout-button-link">
                         <button type = "button" id = "home-logout-button">
@@ -40,7 +43,7 @@
                                 </svg>
                             </div>
                             <div id = "logout-button-text-div">
-                                <span id = "logout-button-text">Voltar</span>
+                                <span id = "logout-button-text">Log Out</span>
                             </div>
                         </button>
                     </a>

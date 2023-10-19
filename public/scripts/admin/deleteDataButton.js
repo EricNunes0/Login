@@ -12,7 +12,7 @@ deleteDataButton.addEventListener("click", () => {
     fetch("/admin", {
         method: "POST",
         body: JSON.stringify({
-            operation: "DELETE",
+            operation: "Delete",
             ids: ids
         }),
         headers: {

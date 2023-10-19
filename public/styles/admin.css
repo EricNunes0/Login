@@ -75,8 +75,7 @@ html, body {
     background-color: rgba(128, 128, 128, 0.1);
 }
 .table-tr[class~="selected"] {
-    background-color: #2090ff10;
-    outline: 2px solid #2090ffa0;
+    background-color: #2090ff60;
 }
 
 #table-title-tr {

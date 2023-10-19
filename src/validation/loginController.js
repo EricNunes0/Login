@@ -4,9 +4,9 @@ const createCookie = require("../cookies/createCookie");
 
 exports.loginController = (req, res, next) => {
     const body = req.body;
-    let db = database.open();
     const email = body.email;
     const password = body.password;
+    console.log(password)
 
     /* Validação */
     const errors = validationResult(req);
@@ -28,29 +28,32 @@ exports.loginController = (req, res, next) => {
         var inputData = matchedData(req);
     }
 
-    let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1`;
-    console.log(query)
-    db.get(query, (err, row) => {
-        console.log("🌐 Este é o resultado:", row);
-        if(!row) {
-            let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
-            res.render("index", {error: {
-                type: "\"EmailNotFound\"",
-                message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
-            }});
-        } else {
-            if(password !== row.password) {
+    const connection = database.open();
+    connection.connect(function(e) {
+        let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
+        connection.query(query, (err, row) => {
+            console.log(query, row.length)
+            if(row.length == 0) {
+                let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
                 res.render("index", {error: {
-                    type:"\"InvalidPassword\"",
-                    message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
+                    type: "\"EmailNotFound\"",
+                    message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
                 }});
             } else {
-                createCookie(res, `firstName`, row.firstName);
-                createCookie(res, `lastName`, row.lastName);
-                createCookie(res, `gender`, row.gender);
-                res.redirect("../home");
+                row = row[0];
+                if(password !== row.password) {
+                    res.render("index", {error: {
+                        type:"\"InvalidPassword\"",
+                        message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
+                    }});
+                } else {
+                    createCookie(res, `firstName`, row.firstName);
+                    createCookie(res, `lastName`, row.lastName);
+                    createCookie(res, `gender`, row.gender);
+                    res.redirect("../home");
+                };
             };
-        };
+            database.close(connection);
+        });
     });
-    database.close(db);
 };
