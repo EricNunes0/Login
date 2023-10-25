@@ -15,10 +15,6 @@
     <main id = "admin-main">
         <div id = "admin-main-background"></div>
         <div id = "navigation-output"></div>
-        <script>
-            let navigation = `<%- include("navigation.ejs") %>`;
-            document.querySelector("#navigation-output").innerHTML = navigation;
-        </script>
         <div id = "admin-area">
             <div id = "admin-table-div">
                 <table id = "admin-table">
@@ -35,15 +31,6 @@
                             <th class = "table-titles">Admin</th>
                             <th class = "table-titles">Ícone</th>
                         </tr>
-                        <script type="text/javascript">
-                            <% if(typeof registers !="undefined" && registers) { %>
-                                let registersLoaded = <%- JSON.stringify(registers) %>;
-                                console.table(registersLoaded);
-                                registersLoaded.forEach((reg) => {
-                                    CreateTableRow({register: reg});
-                                });
-                            <% } %>
-                        </script>
                     </tbody>
                 </table>
             </div>  
@@ -58,23 +45,23 @@
                 <div id = "controls-div">
                     <!-- Botão de criar tabela -->
                     <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "create-table-button">
+                        <button type="button" class="controls-buttons" id = "create-registers-table-button">
                             <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/create.svg"></img>
+                                <img class = "controls-buttons-images" src = "../svgs/admin/silhouetteplus.svg"></img>
                             </div>
                             <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Criar tabela</span>
+                                <span class="controls-buttons-texts">Criar tabela de cadastros</span>
                             </div>
                         </button>
                     </div>
                     <!-- Botão de excluir tabela -->
                     <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "drop-table-button">
+                        <button type="button" class="controls-buttons" id = "drop-registers-table-button">
                             <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/drop.svg"></img>
+                                <img class = "controls-buttons-images" src = "../svgs/admin/silhouetteminus.svg"></img>
                             </div>
                             <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Excluir tabela</span>
+                                <span class="controls-buttons-texts">Excluir tabela de cadastros</span>
                             </div>
                         </button>
                     </div>
@@ -85,18 +72,76 @@
                                 <img class = "controls-buttons-images" src = "../svgs/admin/garbage.svg"></img>
                             </div>
                             <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Excluir</span>
+                                <span class="controls-buttons-texts">Excluir usuários</span>
+                            </div>
+                        </button>
+                    </div>
+                    <!-- Botão de adicionar administradores -->
+                    <div class = "controls-buttons-divs">
+                        <button type="button" class="controls-buttons" id = "admin-add-button">
+                            <div class="controls-buttons-image-divs">
+                                <img class = "controls-buttons-images" src = "../svgs/admin/admin.svg"></img>
+                            </div>
+                            <div class="controls-buttons-text-divs">
+                                <span class="controls-buttons-texts">Adicionar administradores</span>
+                            </div>
+                        </button>
+                    </div>
+                    <!-- Botão de criar tabela de sessões -->
+                    <div class = "controls-buttons-divs">
+                        <button type="button" class="controls-buttons" id = "create-sessions-table-button">
+                            <div class="controls-buttons-image-divs">
+                                <img class = "controls-buttons-images" src = "../svgs/admin/create.svg"></img>
+                            </div>
+                            <div class="controls-buttons-text-divs">
+                                <span class="controls-buttons-texts">Criar tabela de sessões</span>
+                            </div>
+                        </button>
+                    </div>
+                    <!-- Botão de excluir tabela de sessões -->
+                    <div class = "controls-buttons-divs">
+                        <button type="button" class="controls-buttons" id = "drop-sessions-table-button">
+                            <div class="controls-buttons-image-divs">
+                                <img class = "controls-buttons-images" src = "../svgs/admin/drop.svg"></img>
+                            </div>
+                            <div class="controls-buttons-text-divs">
+                                <span class="controls-buttons-texts">Excluir tabela de sessões</span>
                             </div>
                         </button>
                     </div>
                 </div>
             </div>
         </section>
+        <div id = "popup-absolute"></div>
     </main>
-    <script type="text/javascript" src = "../scripts/admin/createTableButton.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/adminAddButton.js"></script><!-- Evento do botão para adicionar administradores -->
+    <script type="text/javascript" src = "../scripts/admin/createRegistersTableButton.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/createSessionsTableButton.js"></script>
     <script type="text/javascript" src = "../scripts/admin/deleteDataButton.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/dropTableButton.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/dropRegistersTableButton.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/dropSessionsTableButton.js"></script>
     <script type="text/javascript" src = "../scripts/admin/openControls.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/popupCreate.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/popupDelete.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/popupRunAnimation.js"></script>
+    <script type = "text/javascript">
+        let navigation = `<%- include("navigation.ejs") %>`;
+        document.querySelector("#navigation-output").innerHTML = navigation;
+        <% if(typeof registers !="undefined" && registers) { %>
+            let registersLoaded = <%- JSON.stringify(registers) %>;
+            console.table(registersLoaded);
+            registersLoaded.forEach((reg) => {
+                CreateTableRow({register: reg});
+            });
+        <% } %>
+        <% if(typeof user !="undefined" && user) { %>
+            var user = <%- JSON.stringify(user) %>;
+            console.log(user);
+            if(user) {
+                var userId = user.userId;
+            };
+        <% } %>
+    </script>
     <script type="text/javascript" src = "../scripts/admin/trSelect.js"></script>
 </body>
 </html>

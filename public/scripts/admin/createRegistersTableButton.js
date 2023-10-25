@@ -1,10 +1,10 @@
-const createTableButton = document.querySelector("#create-table-button");
+const createRegistersTableButton = document.querySelector("#create-registers-table-button");
 
-createTableButton.addEventListener("click", () => {
+createRegistersTableButton.addEventListener("click", () => {
     fetch("/admin", {
         method: "POST",
         body: JSON.stringify({
-            operation: "CreateTable"
+            operation: "CreateRegistersTable"
         }),
         headers: {
             'Accept': 'application/json, text/plain, */*',

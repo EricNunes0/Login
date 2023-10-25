@@ -1,5 +1,24 @@
 :root {
+    --confirm-buttons-width: 120px;
+    --confirm-buttons-height: 35px;
+    --confirm-buttons-icons-width: 18px;
+    --confirm-buttons-icons-height: 18px;
+    --confirm-close-buttons-width: 48px;
+    --confirm-close-buttons-height: 48px;
+    --fixed-button-size: 48px;
+    --fixed-div-width: 400px;
+    --fixed-header-height: 56px;
+    --fixed-main-buttons-width: 150px;
+    --fixed-main-buttons-height: 35px;
+    --icon-width: 200px;
+    --icon-height: 200px;
+    --loading-width: 48px;
+    --loading-height: 48px;
     --logout-button-color: #20ff60;
+    --popup-width: 300px;
+    --popup-height: 50px;
+    --popup-color: #202a30;
+    --usericon-size: 96px;
 }
 
 * {
@@ -19,6 +38,521 @@ img, svg {
     -webkit-user-select: none;
 }
 
+/* Menu fixo */
+#home-fixed-menu {
+    pointer-events: none;
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+}
+#home-fixed-menu[class~="closed"] {
+    opacity: 0;
+}
+
+/* Área fixa */
+#fixed-area {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Área para fechar área fixa */
+#fixed-close-area {
+    pointer-events: all;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+#fixed-close-area[class~="closed"] {
+    pointer-events: none;
+}
+
+/* Div fixa */
+#fixed-div {
+    pointer-events: all;
+    position: fixed;
+    z-index: 2;
+    width: var(--fixed-div-width);
+    background-color: #202a30;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: all 0.3s;
+}
+#fixed-div[class~="closed"] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+/* Header fixo */
+#fixed-header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--fixed-header-height);
+}
+
+/* Div do botão de fechar div fixa */
+#fixed-close-div {
+    position: absolute;
+    top: calc(calc(var(--fixed-header-height) - var(--fixed-button-size)) / 2);
+    left: calc(calc(var(--fixed-header-height) - var(--fixed-button-size)) / 2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botão de fechar div fixa */
+#fixed-close-button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--fixed-button-size);
+    height: var(--fixed-button-size);
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+#fixed-close-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Ícone do botão de fechar div fixa */
+#fixed-close-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Título da div fixa */
+#fixed-title {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Área principal da área fixa */
+#fixed-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Div dos textos da área fixa principal */
+#fixed-main-texts-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+}
+
+/* Div do título da área fixa principal */
+#fixed-main-title-div {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Título da área fixa principal */
+#fixed-main-title {
+    color: #fff;
+    font-size: 20px;
+    text-align: left;
+}
+
+/* Div da descrição da área fixa principal */
+#fixed-main-description-div {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Descrição da área fixa principal */
+#fixed-main-description {
+    color: #b0b0b0;
+    font-size: 16px;
+    text-align: left;
+}
+
+/* Div do ícone na área fixa principal */
+#fixed-main-icon-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botão do ícone na área principal */
+#fixed-main-icon-button {
+    width: 200px;
+    height: 200px;
+}
+
+/* Ícone na área principal */
+#fixed-main-icon {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+#fixed-main-icon-button:hover > #fixed-main-icon {
+    border-radius: 0;
+}
+
+/* Inputs de arquivo escondidos */
+.fixed-main-inputs[class~="hidden"] {
+    display: none;
+}
+
+/* Div dos botões da área fixa principal */
+#fixed-main-buttons-div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+/* Divs de cada botão da área fixa principal */
+.fixed-main-buttons-divs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botões da área fixa principal */
+.fixed-main-buttons {
+    width: var(--fixed-main-buttons-width);
+    height: var(--fixed-main-buttons-height);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 3px;
+    outline: 1px solid #20ff60;
+    transition: all 0.3s;
+}
+.fixed-main-buttons:hover {
+    background-color: #20ff60;
+    box-shadow: 0px 0px 10px #20ff60;
+    transform: scale(1.05);
+}
+
+/* Ícones dos botões da área fixa principal */
+.fixed-main-buttons-icons {
+    width: 18px;
+    height: 18px;
+    transition: all 0.3s;
+}
+.fixed-main-buttons:hover > .fixed-main-buttons-icons {
+    filter: grayscale(1) brightness(1.5);
+}
+
+/* Textos dos botões da área fixa principal */
+.fixed-main-buttons-texts {
+    color: #20ff60;
+    transition: all 0.3s;
+}
+.fixed-main-buttons:hover > .fixed-main-buttons-texts {
+    color: #fff;
+}
+
+/* Áreas de confirmação */
+.confirm-areas {
+    position: relative;
+    pointer-events: all;
+    position: fixed;
+    z-index: 3;
+    width: var(--fixed-div-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #202a30;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    transition: all 0.3s;
+}
+.confirm-areas[class~="closed"] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+/* Divs dos botões de fechar áreas de confirmação */
+.confirm-close-divs {
+    position: absolute;
+    top: calc(calc(var(--fixed-header-height) - var(--fixed-button-size)) / 2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.confirm-close-divs[class~="left"] {
+    left: calc(calc(var(--fixed-header-height) - var(--fixed-button-size)) / 2);
+}
+.confirm-close-divs[class~="right"] {
+    right: calc(calc(var(--fixed-header-height) - var(--fixed-button-size)) / 2);
+}
+
+/* Botões de fechar áreas de confirmação */
+.confirm-close-buttons {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--confirm-close-buttons-width);
+    height: var(--confirm-close-buttons-height);
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+.confirm-close-buttons:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Ícones dos botões de fechar áreas de confirmação */
+.confirm-close-icons {
+    width: 24px;
+    height: 24px;
+}
+
+/* Divs dos títulos das áreas de confirmação */
+.confirm-area-title-divs {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* Títulos das áreas de confirmação */
+.confirm-area-titles {
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Div da descrição do novo ícone */
+.confirm-area-description-divs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Descriçãos das áreas de confirmações */
+.confirm-area-descriptions {
+    color: #b0b0b0;
+    font-size: 16px;
+    text-align: center;
+    max-width: 90%;
+}
+
+/* Divs dos ícones */
+.icon-divs {
+    width: var(--icon-width);
+    height: var(--icon-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    border-radius: 5px;
+    outline: 3px double #a0a0a0;
+}
+
+/* Ícones */
+.icons {
+    -webkit-user-drag: all;
+    user-select: all;
+    -ms-user-select: all;
+    -moz-user-select: all;
+    -webkit-user-select: all;
+    width: var(--icon-width);
+    height: var(--icon-height);
+    object-fit: cover;
+    transition: all 0.3s;
+}
+.icons[class~="loading"] {
+    width: calc(var(--icon-width) / 4);
+    height: calc(var(--icon-height) / 4);
+    object-fit: contain;
+}
+
+/* Div dos botões de novo ícone */
+#confirm-buttons-div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+/* Divs de cada botão do novo ícone */
+.confirm-buttons-divs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botões do novo ícone */
+.confirm-buttons {
+    width: var(--confirm-buttons-width);
+    height: var(--confirm-buttons-height);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: #20ff60;
+    border-radius: 3px;
+    outline: 2px solid #20ff60;
+    transition: all 0.3s;
+}
+.confirm-buttons:hover {
+    background-color: #20ff60;
+    color: #fff;
+    box-shadow: 0px 0px 10px #20ff60;
+    transform: scale(1.05);
+}
+
+.confirm-buttons-icons {
+    width: var(--confirm-buttons-icons-width);
+    height: var(--confirm-buttons-icons-height);
+    transition: all 0.3s;
+}
+.confirm-buttons:hover > .confirm-buttons-icons {
+    filter: grayscale(1) brightness(1.5);
+}
+
+/* Área de carregamento */
+#loading-area {
+    pointer-events: all;
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: all 0.3s;
+}
+#loading-area[class~="closed"] {
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* Div de carregamento */
+#loading-div {
+    width: var(--loading-width);
+    height: var(--loading-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Imagem do carregamento */
+#loading {
+    width: var(--loading-width);
+    height: var(--loading-height);
+    /*animation: Loading 1s linear infinite;*/
+}
+@keyframes Loading {
+    100% {
+        rotate: 360deg;
+    }
+}
+
+/* Área absoluta do popup */
+#popup-absolute {
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popups */
+.popups {
+    position: absolute;
+    bottom: calc(0px + calc(var(--popup-height) / 2));
+    min-width: var(--popup-width);
+    height: var(--popup-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--popup-color);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+.popups[class~="closed"] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+/* Barras do popup */
+.popup-bars {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: all 0.3s;
+}
+
+.popups[class~="green"] > .popup-bars {
+    background-color: #20ff60;
+}
+.popups[class~="red"] > .popup-bar {
+    background-color: #f02020;
+}
+
+/* Divs das mensagens do popup */
+.popup-message-divs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mensagens dos popups */
+.popup-messages {
+    color: #fff;
+    font-size: 16px;
+}
+
 #home-main {
     width: 100vw;
     height: 100vh;
@@ -29,36 +563,63 @@ img, svg {
 
 #home-area {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 1rem;
 }
 
-#home-image {
-    width: 400px;
-    height: 400px;
-    opacity: 1;
-    animation: HomeImageReveal 2s ease-in-out 1;
-}
-@keyframes HomeImageReveal {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-}
-
-/* Div do ícone do usuário */
-#home-user-icon-div {
+/* Div do botão com ícone do usuário */
+#user-icon-button-div {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Botão com ícone do usuário */
+#user-icon-button {
+    cursor: pointer;
+    position: relative;
+    width: var(--usericon-size);
+    height: var(--usericon-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    outline: 3px solid #fff;
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+}
+#user-icon-button:hover {
+    outline: 3px solid #20ff60;
+}
+#user-icon-button::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--usericon-size) / 2);
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url("../svgs/admin/camera.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: calc(var(--usericon-size) / 4);
+    clip-path: circle(calc(var(--usericon-size) / 2) at 50% 0);
+    filter: contrast(0.7);
+    opacity: 0;
+    transition: all 0.3s;
+}
+#user-icon-button:hover::after {
+    opacity: 1;
+}
+
 /* Ícone do usuário */
-#home-user-icon {
+#user-icon {
+    position: relative;
     width: 96px;
     height: 96px;
     border-radius: 50%;
@@ -69,6 +630,7 @@ img, svg {
     color: #fff;
     font-size: 40px;
     font-weight: 100;
+    text-align: center;
 }
 
 /* Texto da mensagem de online */
@@ -82,6 +644,58 @@ img, svg {
     color: #d0d0d0;
     margin-top: 5px;
     text-align: center;
+}
+
+/* Área principal */
+#home-main-area {
+    margin: 10px 0;
+}
+
+/* Botões principais */
+.home-main-buttons {
+    border-radius: 10px;
+    outline: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+}
+.home-main-buttons:hover {
+    box-shadow: 0px 0px 3px #20ff60;
+    outline: 1px solid #20ff60;
+}
+
+/* Área de customização */
+#custom-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Divs dos textos */
+.main-texts-divs {
+    width: 200px;
+}
+
+/* Título da customização */
+#custom-title {
+    color: #fff;
+    font-size: 20px;
+    text-align: left;
+}
+
+/* Descrição da customização */
+#custom-description {
+    color: #f0f0f0;
+    font-size: 14px;
+    text-align: left;
+    text-wrap: wrap;
+}
+
+/* Ícone de customização */
+#custom-icon {
+    width: 90px;
+    height: 90px;
 }
 
 #home-logout-button-div {
@@ -133,4 +747,11 @@ img, svg {
 /* Texto do botão de log out */
 #logout-button-text {
     font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+    #fixed-div {
+        width: 100%;
+        height: 100%;
+    }
 }

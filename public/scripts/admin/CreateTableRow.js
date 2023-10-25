@@ -7,7 +7,7 @@ function CreateTableRow({register}) {
     tr.className = `table-tr ${rowNumber}`;
     rowNumber === 1 ? rowNumber = 2 : rowNumber = 1;
     
-    tr.appendChild(CreateTableData({dataname: "id", data: register.ID}));
+    tr.appendChild(CreateTableData({dataname: "userId", data: register.userId}));
     tr.appendChild(CreateTableData({dataname: "firstName", data: register.firstName}));
     tr.appendChild(CreateTableData({dataname: "lastName", data: register.lastName}));
     tr.appendChild(CreateTableData({dataname: "date", data: register.date}));

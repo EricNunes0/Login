@@ -1,6 +1,8 @@
 const database = require("../database");
 const { validationResult, matchedData } = require("express-validator");
 const createCookie = require("../cookies/createCookie");
+const createSession = require("../sessions/createSession");
+const { v4: uuidv4 } = require("uuid");
 
 exports.loginController = (req, res, next) => {
     const body = req.body;
@@ -32,28 +34,29 @@ exports.loginController = (req, res, next) => {
     connection.connect(function(e) {
         let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
         connection.query(query, (err, row) => {
-            console.log(query, row.length)
             if(row.length == 0) {
+                database.close(connection);
                 let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
-                res.render("index", {error: {
+                return res.render("index", {error: {
                     type: "\"EmailNotFound\"",
                     message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
                 }});
             } else {
                 row = row[0];
                 if(password !== row.password) {
-                    res.render("index", {error: {
+                    database.close(connection);
+                    return res.render("index", {error: {
                         type:"\"InvalidPassword\"",
                         message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
                     }});
                 } else {
-                    createCookie(res, `firstName`, row.firstName);
-                    createCookie(res, `lastName`, row.lastName);
-                    createCookie(res, `gender`, row.gender);
-                    res.redirect("../home");
+                    const userId = row.userId;
+                    const sessionId = createSession(connection, userId);
+                    createCookie(res, "sessionId", sessionId);
+                    database.close(connection);
+                    return res.redirect("../home");
                 };
             };
-            database.close(connection);
         });
     });
 };

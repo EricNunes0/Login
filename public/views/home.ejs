@@ -10,6 +10,130 @@
     <link rel = "stylesheet" href = "../styles/navigation.css"/>
 </head>
 <body>
+    <div class ="closed" id = "home-fixed-menu">
+        <div id = "fixed-area">
+            <div class = "closed" id = "fixed-close-area"></div>
+            <div class = "closed" id = "fixed-div">
+                <header id = "fixed-header">
+                    <div id = "fixed-close-div">
+                        <button type="button" id = "fixed-close-button" onclick="fixedMenuClose()">
+                            <img id = "fixed-close-icon" src = "../svgs/home/close.svg"></img>
+                        </button>
+                    </div>
+                    <div id = "fixed-title-div">
+                        <h1 id = "fixed-title">Alterar ícone</h1>
+                    </div>
+                </header>
+                <main id = "fixed-main">
+                    <div id = "fixed-main-texts-div">
+                        <div id = "fixed-main-title-div">
+                            <h1 id = "fixed-main-title">Foto de perfil</h1>
+                        </div>
+                        <div id = "fixed-main-description-div">
+                            <h1 id = "fixed-main-description">Escolha uma foto de perfil para deixar seu perfil com a sua cara</h1>
+                        </div>
+                    </div>
+                    <div id = "fixed-main-icon-div">
+                        <button type="button" accesskey="i" id = "fixed-main-icon-button">
+                            <img id = "fixed-main-icon" src = "../images/usericon.png"></img>
+                        </button>
+                    </div>
+                    <div id = "fixed-main-buttons-div">
+                        <div class = "fixed-main-buttons-divs">
+                            <input type="file" class = "fixed-main-inputs hidden" id="alter-icon-input" accept="image/png, image/jpg, image/jpeg"/>
+                            <button type = "button" class="fixed-main-buttons" id = "alter-icon-button">
+                                <img class = "fixed-main-buttons-icons" src = "../svgs/home/pencil.svg"></img>
+                                <span class = "fixed-main-buttons-texts">Alterar</span>
+                            </button>
+                        </div>
+                        <div class = "fixed-main-buttons-divs">
+                            <button type="button" class="fixed-main-buttons" id = "remove-icon-button">
+                                <img class = "fixed-main-buttons-icons" src = "../svgs/home/garbage.svg"></img>
+                                <span class = "fixed-main-buttons-texts">Remover</span>
+                            </button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div class = "confirm-areas closed" id = "new-icon-area">
+                <div class = "confirm-close-divs left">
+                    <button type="button" class = "confirm-close-buttons" id = "new-return-button">
+                        <img class = "confirm-close-icons" src = "../svgs/home/left.svg"></img>
+                    </button>
+                </div>
+                <div class = "confirm-close-divs right">
+                    <button type="button" class = "confirm-close-buttons" id = "new-close-button">
+                        <img class = "confirm-close-icons" src = "../svgs/home/close.svg"></img>
+                    </button>
+                </div>
+                <div class = "confirm-area-title-divs" id = "new-icon-title-div">
+                    <h1 class = "confirm-area-titles" id = "new-icon-title">Nova foto de perfil</h1>
+                </div>
+                <div class = "confirm-area-description-divs" id = "new-icon-description-div">
+                    <h1 class = "confirm-area-descriptions" id = "new-icon-description">Tem certeza que deseja salvar esta imagem como foto de perfil?</h1>
+                </div>
+                <div class = "icon-divs" id = "new-icon-div">
+                    <img class = "icons" id = "new-icon" src = ""></img>
+                </div>
+                <div id = "confirm-buttons-div">
+                    <div class = "confirm-buttons-divs">
+                        <button type = "button" class = "confirm-buttons" id = "alter-confirm">
+                            <img class = "confirm-buttons-icons" src = "../svgs/home/yes.svg"></img>
+                            <p class = "confirm-buttons-texts">Confirmar</p>
+                        </button>
+                    </div>
+                    <div class = "confirm-buttons-divs">
+                        <button type = "button" class = "confirm-buttons" id = "alter-cancel">
+                            <img class = "confirm-buttons-icons" src = "../svgs/home/no.svg"></img>
+                            <p class = "confirm-buttons-texts">Cancelar</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class = "confirm-areas closed" id = "remove-icon-confirm-area">
+                <div class = "confirm-close-divs left">
+                    <button type="button" class = "confirm-close-buttons" id = "old-return-button">
+                        <img class = "confirm-close-icons" src = "../svgs/home/left.svg"></img>
+                    </button>
+                </div>
+                <div class = "confirm-close-divs right">
+                    <button type="button" class = "confirm-close-buttons" id = "old-close-button">
+                        <img class = "confirm-close-icons" src = "../svgs/home/close.svg"></img>
+                    </button>
+                </div>
+                <div class = "confirm-area-title-divs" id = "remove-icon-title-div">
+                    <h1 class = "confirm-area-titles" id = "remove-icon-title">Remover foto de perfil</h1>
+                </div>
+                <div class = "confirm-area-description-divs" id = "remove-icon-description-div">
+                    <h1 class = "confirm-area-descriptions" id = "remove-icon-description">Tem certeza que deseja remover esta imagem como foto de perfil?</h1>
+                </div>
+                <div class = "icon-divs" id = "old-icon-div">
+                    <img class = "icons" id = "old-icon" src = ""></img>
+                </div>
+                <div id = "confirm-buttons-div">
+                    <div class = "confirm-buttons-divs">
+                        <button type = "button" class = "confirm-buttons" id = "remove-confirm">
+                            <img class = "confirm-buttons-icons" src = "../svgs/home/yes.svg"></img>
+                            <p class = "confirm-buttons-texts">Confirmar</p>
+                        </button>
+                    </div>
+                    <div class = "confirm-buttons-divs">
+                        <button type = "button" class = "confirm-buttons" id = "remove-cancel">
+                            <img class = "confirm-buttons-icons" src = "../svgs/home/no.svg"></img>
+                            <p class = "confirm-buttons-texts">Cancelar</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class = "closed" id = "loading-area">
+                <div id = "loading-div">
+                    <img id = "loading" src = "../images/home/loading.gif"></img>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id = "popup-absolute">
+    </div>
     <div id = "navigation-output"></div>
     <script>
         let navigation = `<%- include("navigation.ejs") %>`;
@@ -17,21 +141,35 @@
     </script>
     <main id = "home-main">
         <div id = "home-area">
-            <section class = "home-area-divs" id = "home-image-div">
-                <img id = "home-image" src = "../images/welcome.png"></img>
-            </section>
             <section class = "home-area-divs" id = "home-texts-div">
-                <div id = "home-user-icon-div">
-                    <img id = "home-user-icon" src = "https://cdn-icons-png.flaticon.com/512/9131/9131529.png"></img>
+                <div id = "user-icon-button-div">
+                    <button id = "user-icon-button" onclick="fixedMenuOpen()">
+                        <img id = "user-icon" src = "../images/usericon.png"></img>
+                    </button>
                 </div>
-                <% if (user) { %>
-                    <h1 id = "welcome-message">
-                        <% if (user.gender == "M") {%>
-                            Bem-vindo<%}%><% if (user.gender == "F") {%>Bem-vinda<%}%><% if (user.gender == "O") {%>Bem-vindo(a)
-                        <%}%>,
-                        <%= user.firstName %> <%= user.lastName %></h1>
-                        <% } %>
+                    <h1 id = "welcome-message"></h1>
                 <p id = "home-online-text">Você está online!</p>
+            </section>
+            <section class = "home-area-divs" id = "home-main-div">
+                <div id = "home-main-area">
+                    <button type = "button" class = "home-main-buttons" id = "custom-button" onclick="fixedMenuOpen()">
+                        <div id = "custom-area">
+                            <div class = "main-texts-divs" id = "custom-texts-div">
+                                <div id = "custom-title-div">
+                                    <h1 id = "custom-title">Customização</h1>
+                                </div>
+                                <div id = "custom-description-div">
+                                    <p id = "custom-description">Personalize a sua conta para deixá-la com a sua cara</p>
+                                </div>
+                            </div>
+                            <div id = "custom-icon-div">
+                                <img id = "custom-icon" src = "../svgs/home/custom.svg"></img>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </section>
+            <section class = "home-area-divs" id = "home-logout-div">
                 <div id = "home-logout-button-div">
                     <a href = "/" id = "home-logout-button-link">
                         <button type = "button" id = "home-logout-button">
@@ -43,7 +181,7 @@
                                 </svg>
                             </div>
                             <div id = "logout-button-text-div">
-                                <span id = "logout-button-text">Log Out</span>
+                                <a href="/logout" id = "logout-button-text">Log Out</a>
                             </div>
                         </button>
                     </a>
@@ -51,6 +189,86 @@
             </section>
         </div>
     </main>
-    <script type = "text/javascript" src = "../scripts/logoutIcon.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/alterCancel.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/alterConfirm.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/alterIconButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/alterIconFile.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/alterIconInputRemove.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedClosedAreaClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedClosedAreaOpen.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedDivClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedDivOpen.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMainIconButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMainIconFileRead.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMainIconSet.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMenuClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMenuEvent.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMenuOpen.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/loadingAreaClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/loadingAreaOpen.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/logoutIcon.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/newCloseButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/newIconAreaClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/newIconAreaOpen.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/newIconRemove.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/newReturnButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldCloseButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldIconAreaClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldIconBuffer.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldIconLoadingEnd.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldIconLoadingStart.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldIconRemove.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldIconSet.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/oldReturnButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/popupCreate.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/popupDelete.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/popupRunAnimation.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/removeCancel.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/removeConfirm.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/removeIconAreaClose.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/removeIconButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/userIconFileRead.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/userIconSet.js"></script>
+    <script type = "text/javascript">
+        var standardUserIcon = "../images/usericon.png";
+        <% if(typeof user !="undefined" && user) { %>
+            const welcomeMessage = document.querySelector("#welcome-message");
+            const fixedMainIcon = document.querySelector("#fixed-main-icon");
+            var user = <%- JSON.stringify(user) %>;
+            console.log(user);
+            if(user) {
+                var userId = user.userId;
+                const firstName = user.firstName;
+                const lastName = user.lastName;
+                const gender = user.gender;
+                const icon = user.icon;
+                let welcomeMsg = "";
+                switch(gender) {
+                    case "M":
+                        welcomeMsg = "Bem-vindo";
+                        break;
+                    case "F":
+                        welcomeMsg = "Bem-vinda";
+                        break;
+                    default:
+                        welcomeMsg = "Bem-vindo(a)";
+                        break;
+                };
+                welcomeMsg = welcomeMsg + `, ${firstName} ${lastName}!`;
+                welcomeMessage.textContent = welcomeMsg;
+                if(icon) {
+                    function toBase64(arr) {
+                        return btoa(
+                            arr.reduce((data, byte) => data + String.fromCharCode(byte), '')
+                        );
+                    };
+                    let iconBase64 = toBase64(icon.data);
+                    let userAvatar = `data:image/png;base64,${iconBase64}`;
+                    userIconSet(userAvatar);
+                    fixedMainIcon.src = userAvatar;
+                };
+            };
+        <% } %>
+    </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ module.exports.CreateTable = (connection) => {
         if(e) throw new Error(e);
         connection.query(`
             CREATE TABLE if not exists ${tableName} (
-                ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+                userId VARCHAR(50) PRIMARY KEY NOT NULL,
                 firstName VARCHAR(50) NOT NULL,
                 lastName VARCHAR(50) NOT NULL,
                 date DATE NOT NULL,

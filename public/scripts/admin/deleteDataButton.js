@@ -5,7 +5,7 @@ deleteDataButton.addEventListener("click", () => {
     let ids = [];
     for(const tr of trs) {
         if(tr.className.includes(`selected`)) {
-            ids.push(tr.querySelector("#id").textContent);
+            ids.push(tr.querySelector("#userId").textContent);
             tr.remove();
         };
     };

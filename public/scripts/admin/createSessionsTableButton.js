@@ -1,10 +1,10 @@
-const dropTableButton = document.querySelector("#drop-table-button");
+const createSessionsTableButton = document.querySelector("#create-sessions-table-button");
 
-dropTableButton.addEventListener("click", () => {
+createSessionsTableButton.addEventListener("click", () => {
     fetch("/admin", {
         method: "POST",
         body: JSON.stringify({
-            operation: "DropTable"
+            operation: "CreateSessionsTable"
         }),
         headers: {
             'Accept': 'application/json, text/plain, */*',

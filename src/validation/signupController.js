@@ -1,6 +1,8 @@
 const database = require("../database");
 const { validationResult, matchedData } = require("express-validator");
 const createCookie = require("../cookies/createCookie");
+const createSession = require("../sessions/createSession");
+const { v4: uuidv4 } = require("uuid");
 
 exports.signupController = (req, res, next) => {
     const body = req.body;
@@ -37,24 +39,24 @@ exports.signupController = (req, res, next) => {
     connection.connect(function(e) {
         let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
         connection.query(query, (err, row) => {
-            console.log(query, row.length)
             if(row.length != 0) {
+                database.close(connection);
                 let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
-                res.render("index", {error: {
+                return res.render("index", {error: {
                     type: "\"EmailExists\"",
                     message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
                 }});
             } else {
+                const userId = uuidv4();
                 connection.query(`
-                    INSERT INTO registers (firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-                    [firstName, lastName, date, gender, email, phone, password, false]
+                    INSERT INTO registers (userId, firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                    [userId, firstName, lastName, date, gender, email, phone, password, false]
                 );
-                createCookie(res, `firstName`, firstName);
-                createCookie(res, `lastName`, lastName);
-                createCookie(res, `gender`, gender);
-                res.redirect("../home");
+                const sessionId = createSession(connection, userId);
+                createCookie(res, "sessionId", sessionId);
+                database.close(connection);
+                return res.redirect("../home");
             };
-            database.close(connection);
         });
     });
 };
