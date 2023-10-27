@@ -34,28 +34,34 @@ exports.loginController = (req, res, next) => {
     connection.connect(function(e) {
         let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
         connection.query(query, (err, row) => {
-            if(row.length == 0) {
-                database.close(connection);
-                let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
-                return res.render("index", {error: {
-                    type: "\"EmailNotFound\"",
-                    message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
-                }});
-            } else {
-                row = row[0];
-                if(password !== row.password) {
+            console.log(query, email, row);
+            if(row) {
+                if(row.length == 0) {
                     database.close(connection);
+                    let signupButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-signup' onclick = 'openForms(); callSignupForm();'>Crie uma nova conta</button>";
                     return res.render("index", {error: {
-                        type:"\"InvalidPassword\"",
-                        message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
+                        type: "\"EmailNotFound\"",
+                        message: `\"O e-mail que você inseriu não está cadastrado! ${signupButton}\"`
                     }});
                 } else {
-                    const userId = row.userId;
-                    const sessionId = createSession(connection, userId);
-                    createCookie(res, "sessionId", sessionId);
-                    database.close(connection);
-                    return res.redirect("../home");
+                    row = row[0];
+                    if(password !== row.password) {
+                        database.close(connection);
+                        return res.render("index", {error: {
+                            type:"\"InvalidPassword\"",
+                            message: "\"A senha inserida está incorreta! <a class = 'sign-warning-links' href = '/'>Esqueceu a senha?</a>\""
+                        }});
+                    } else {
+                        const userId = row.userId;
+                        const sessionId = createSession(connection, userId);
+                        createCookie(res, "sessionId", sessionId);
+                        database.close(connection);
+                        return res.redirect("../home");
+                    };
                 };
+            } else {
+                database.close(connection);
+                return res.redirect("/");
             };
         });
     });

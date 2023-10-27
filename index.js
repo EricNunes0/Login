@@ -8,9 +8,10 @@ const { v4: uuidv4 } = require("uuid");
 const database = require("./src/database");
 const register = require("./src/register");
 const dotenv = require("dotenv").config();
-const adminAdd = require("./src/adminAdd");
-const adminGet = require("./src/adminGet");
-const adminPost = require("./src/adminPost");
+const adminAdd = require("./src/admin/adminAdd");
+const adminGet = require("./src/admin/adminGet");
+const adminPost = require("./src/admin/adminPost");
+const adminRemove = require("./src/admin/adminRemove");
 const createCookie = require("./src/cookies/createCookie");
 const createSessionsTable = require("./src/sessions/createSessionsTable");
 const deleteCookie = require("./src/cookies/deleteCookie");
@@ -79,36 +80,41 @@ app.get("/home", (req, res, next) => {
             let query = `SELECT * FROM sessions WHERE sessionId = '${sessionId}' LIMIT 1;`;
             connection.query(query, (err, rows) => {
                 console.log(rows);
-                if(rows.length > 0) {
-                    const userRow = rows[0];
-                    let userSearchQuery = `SELECT * FROM registers WHERE userId = '${userRow.userId}' LIMIT 1;`;
-                    connection.query(userSearchQuery, (err, rows) => {
-                        if(rows.length > 0) {
-                            const foundUser = rows[0];
-                            database.close(connection);
-                            const userInfos = {
-                                userId: foundUser.userId,
-                                firstName: foundUser.firstName,
-                                lastName: foundUser.lastName,
-                                gender: foundUser.gender,
-                                icon: foundUser.icon
+                if(rows) {
+                    if(rows.length > 0) {
+                        const userRow = rows[0];
+                        let userSearchQuery = `SELECT * FROM registers WHERE userId = '${userRow.userId}' LIMIT 1;`;
+                        connection.query(userSearchQuery, (err, rows) => {
+                            if(rows.length > 0) {
+                                const foundUser = rows[0];
+                                database.close(connection);
+                                const userInfos = {
+                                    userId: foundUser.userId,
+                                    firstName: foundUser.firstName,
+                                    lastName: foundUser.lastName,
+                                    gender: foundUser.gender,
+                                    icon: foundUser.icon
+                                }
+                                return res.render("home", {user: userInfos});
+                            } else {
+                                /* Deletando sessão caso o userId não seja encontrado */
+                                connection.query(`DELETE FROM sessions WHERE userId = '${userRow.userId}'`, (err, row) => {
+                                    console.log(`Nenhum userID igual a ${sessionId}`);
+                                    return res.redirect(`/`);
+                                });
+                                database.close(connection);
                             }
-                            return res.render("home", {user: userInfos});
-                        } else {
-                            /* Deletando sessão caso o userId não seja encontrado */
-                            connection.query(`DELETE FROM sessions WHERE userId = '${userRow.userId}'`, (err, row) => {
-                                console.log(`Nenhum userID igual a ${sessionId}`);
-                                return res.redirect(`/`);
-                            });
-                            database.close(connection);
-                        }
-                    });
+                        });
+                    } else {
+                        /* Nenhum sessionId encontrado */
+                        database.close(connection);
+                        console.log(`Nenhum sessionId igual a ${sessionId}`);
+                        deleteCookie(res, "sessionId");
+                        return res.redirect(`/`);
+                    };
                 } else {
-                    /* Nenhum sessionId encontrado */
-                    database.close(connection);
-                    console.log(`Nenhum sessionId igual a ${sessionId}`);
-                    deleteCookie(res, "sessionId");
-                    return res.redirect(`/`);
+                    console.log(`Nenhum row encontrado em: /home`);
+                    return res.redirect("/");
                 };
             })
         });
@@ -141,6 +147,8 @@ app.get("/admin", adminGet);
 app.post("/admin", adminPost);
 
 app.post("/admin-add", adminAdd);
+
+app.post("/admin-remove", adminRemove);
 
 app.get("/sessions", (req, res) => {
     const connection = database.open();

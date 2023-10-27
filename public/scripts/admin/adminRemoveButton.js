@@ -1,14 +1,14 @@
-const adminAddButton = document.querySelector("#admin-add-button");
+const adminRemoveButton = document.querySelector("#admin-remove-button");
 
-adminAddButton.addEventListener("click", () => {
+adminRemoveButton.addEventListener("click", () => {
     const ids = getTableRowsSelected();
     if(ids.length <= 0) {
         popupCreate({message: `Nenhum usuário selecionado!`, color: `red`});
         return;
     };
-    const progress = confirm(`Você tem certeza de que deseja adicionar ${ids.length} ${ids.length === 1 ? "administrador" : "administradores"}?`);
+    const progress = confirm(`Você tem certeza de que deseja remover ${ids.length} ${ids.length === 1 ? "administrador" : "administradores"}?`);
     if(progress) {
-        fetch("/admin-add", {
+        fetch("/admin-remove", {
             method: "POST",
             body: JSON.stringify({
                 userId: userId,

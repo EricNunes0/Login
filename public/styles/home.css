@@ -15,6 +15,11 @@
     --loading-width: 48px;
     --loading-height: 48px;
     --logout-button-color: #20ff60;
+    --menu-color: transparent/*#151a20*/;
+    --menu-width: 280px;
+    --menu-max-width: 300px;
+    --menu-icons-size: 28px;
+    --menu-items-height: 50px;
     --popup-width: 300px;
     --popup-height: 50px;
     --popup-color: #202a30;
@@ -28,6 +33,7 @@
 
 html, body {
     background-color: #202a30;
+    background-image: linear-gradient(45deg, #101a20, #202a30);
 }
 
 img, svg {
@@ -207,6 +213,7 @@ img, svg {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    outline: 3px solid #a0a0a0;
     transition: all 0.3s;
 }
 #fixed-main-icon-button:hover > #fixed-main-icon {
@@ -550,18 +557,127 @@ img, svg {
 /* Mensagens dos popups */
 .popup-messages {
     color: #fff;
-    font-size: 16px;
+    font-size: 16fpx;
 }
 
 #home-main {
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
+/* Aside */
+#home-aside {
+    width: calc(var(--menu-width) / 2);
+}
+
+/* Menu principal */
+#home-menu {
+    position: fixed;
+    z-index: 0;
+    top: var(--navigation-height);
+    left: 0;
+    width: 20%;
+    max-width: var(--menu-max-width);
+    background-color: var(--menu-color);
+}
+
+/* Lista do menu */
+#home-menu-list {
+    width: 100%;
+}
+
+/* Itens da lista do menu */
+.home-menu-items {
+    width: 100%;
+    height: var(--menu-items-height);
+}
+
+/* Botões dos itens do menu */
+.home-menu-buttons {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    min-width: 220px;
+    height: var(--menu-items-height);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--menu-color);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    transition: all 0.3s;
+}
+.home-menu-buttons:hover {
+    filter: brightness(0.8);
+}
+.home-menu-buttons::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: transparent;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    opacity: 1;
+    transition: all 0.3s;
+}
+.home-menu-buttons[class~="selected"]::after {
+    width: 100%;
+    background-color: #20ff60;
+    opacity: 0.2;
+}
+
+/* Divs dos ícones e textos dos links */
+.home-menu-icon-divs {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--menu-icons-size);
+    height: var(--menu-icons-size);
+    margin-left: 20px;
+}
+
+/* Ícones do menu */
+.home-menu-icons {
+    position: absolute;
+    z-index: 1;
+    width: var(--menu-icons-size);
+    height: var(--menu-icons-size);
+    filter: grayscale(1) brightness(1.5);
+}
+
+.home-menu-text-divs {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Textos do menu */
+.home-menu-texts {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    text-wrap: nowrap;
+    transition: all 0.3s;
+}
+
 #home-area {
+    height: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -576,6 +692,7 @@ img, svg {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px 0;
 }
 
 /* Botão com ícone do usuário */
@@ -630,6 +747,7 @@ img, svg {
     color: #fff;
     font-size: 40px;
     font-weight: 100;
+    line-height: 50px;
     text-align: center;
 }
 
@@ -747,6 +865,79 @@ img, svg {
 /* Texto do botão de log out */
 #logout-button-text {
     font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    #home-aside {
+        width: unset;
+    }
+
+    #home-menu {
+        width: 100%;
+        max-width: unset;
+    }
+
+    #home-menu-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: calc(24px * 2);
+    }
+
+    .home-menu-items {
+        width: unset;
+    }
+
+    .home-menu-buttons {
+        min-width: unset;
+        height: 100%;
+        justify-content: center;
+        gap: unset;
+        border-top-right-radius: unset;
+        border-bottom-right-radius: unset;
+    }
+    .home-menu-buttons::after {
+        width: 100%;
+        height: unset;
+        background-size: 100% 0px;
+        border-top-right-radius: unset;
+        border-bottom-right-radius: unset;
+        transition: all 0.3s;
+    }
+    .home-menu-buttons[class~="selected"]::after {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        background-image: linear-gradient(90deg, #20ff60, #20ff60);
+        background-size: 100% 2px;
+        background-position: 100% 100%;
+        background-repeat: no-repeat;
+        opacity: 1;
+        transition: none;
+    }
+
+    .home-menu-icon-divs {
+        display: none;
+        margin-left: unset;
+    }
+
+    .home-menu-icons {
+        position: static;
+        font-size: 16px;
+    }
+
+    .home-menu-texts {
+        position: static;
+        font-size: 16px;
+    }
+    .home-menu-buttons[class~="selected"] > .home-menu-text-divs > .home-menu-texts {
+        color: #20ff60;
+    }
+
+    #home-area {
+        padding-top: 40px;
+    }
 }
 
 @media screen and (max-width: 480px) {

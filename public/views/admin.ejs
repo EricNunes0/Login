@@ -8,8 +8,10 @@
     <link rel = "stylesheet" href = "../styles/output.css"/>
     <link rel = "stylesheet" href = "../styles/admin.css"/>
     <link rel = "stylesheet" href = "../styles/navigation.css"/>
+    <script type="text/javascript" src = "../scripts/admin/controlsButtonCreate.js"></script>
     <script type = "text/javascript" src = "../scripts/admin/CreateTableData.js"></script>
     <script type = "text/javascript" src = "../scripts/admin/CreateTableRow.js"></script>
+    
 </head>
 <body>
     <main id = "admin-main">
@@ -43,88 +45,28 @@
                     </button>
                 </div>
                 <div id = "controls-div">
-                    <!-- Botão de criar tabela -->
-                    <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "create-registers-table-button">
-                            <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/silhouetteplus.svg"></img>
-                            </div>
-                            <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Criar tabela de cadastros</span>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Botão de excluir tabela -->
-                    <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "drop-registers-table-button">
-                            <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/silhouetteminus.svg"></img>
-                            </div>
-                            <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Excluir tabela de cadastros</span>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Botão de excluir -->
-                    <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "delete-data-button">
-                            <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/garbage.svg"></img>
-                            </div>
-                            <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Excluir usuários</span>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Botão de adicionar administradores -->
-                    <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "admin-add-button">
-                            <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/admin.svg"></img>
-                            </div>
-                            <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Adicionar administradores</span>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Botão de criar tabela de sessões -->
-                    <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "create-sessions-table-button">
-                            <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/create.svg"></img>
-                            </div>
-                            <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Criar tabela de sessões</span>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Botão de excluir tabela de sessões -->
-                    <div class = "controls-buttons-divs">
-                        <button type="button" class="controls-buttons" id = "drop-sessions-table-button">
-                            <div class="controls-buttons-image-divs">
-                                <img class = "controls-buttons-images" src = "../svgs/admin/drop.svg"></img>
-                            </div>
-                            <div class="controls-buttons-text-divs">
-                                <span class="controls-buttons-texts">Excluir tabela de sessões</span>
-                            </div>
-                        </button>
-                    </div>
                 </div>
             </div>
         </section>
         <div id = "popup-absolute"></div>
     </main>
-    <script type="text/javascript" src = "../scripts/admin/adminAddButton.js"></script><!-- Evento do botão para adicionar administradores -->
-    <script type="text/javascript" src = "../scripts/admin/createRegistersTableButton.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/createSessionsTableButton.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/deleteDataButton.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/dropRegistersTableButton.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/dropSessionsTableButton.js"></script>
+    <script type="text/javascript" src = "../scripts/admin/getTableRowsSelected.js"></script>
     <script type="text/javascript" src = "../scripts/admin/openControls.js"></script>
     <script type="text/javascript" src = "../scripts/admin/popupCreate.js"></script>
     <script type="text/javascript" src = "../scripts/admin/popupDelete.js"></script>
     <script type="text/javascript" src = "../scripts/admin/popupRunAnimation.js"></script>
     <script type = "text/javascript">
+        /* Criando botões de configuração */
+        controlsButtonCreate({id: "create-registers-table-button", icon: "../svgs/admin/silhouetteplus.svg", text: "Criar tabela de cadastros"});
+        controlsButtonCreate({id: "drop-registers-table-button", icon: "../svgs/admin/silhouetteminus.svg", text: "Excluir tabela de cadastros"});
+        controlsButtonCreate({id: "delete-data-button", icon: "../svgs/admin/garbage.svg", text: "Excluir usuários"});
+        controlsButtonCreate({id: "admin-add-button", icon: "../svgs/admin/crownplus.svg", text: "Adicionar administradores"});
+        controlsButtonCreate({id: "admin-remove-button", icon: "../svgs/admin/crownminus.svg", text: "Remover administradores"});
+        controlsButtonCreate({id: "create-sessions-table-button", icon: "../svgs/admin/create.svg", text: "Criar tabela de sessões"});
+        controlsButtonCreate({id: "drop-sessions-table-button", icon: "../svgs/admin/drop.svg", text: "Excluir tabela de sessões"});
+        
+
+        /* Adicionando barra de navegação */
         let navigation = `<%- include("navigation.ejs") %>`;
         document.querySelector("#navigation-output").innerHTML = navigation;
         <% if(typeof registers !="undefined" && registers) { %>
@@ -141,7 +83,14 @@
                 var userId = user.userId;
             };
         <% } %>
-    </script>
+    </script>    
+    <script type="text/javascript" src = "../scripts/admin/adminAddButton.js"></script><!-- Evento do botão para adicionar administradores -->
+    <script type="text/javascript" src = "../scripts/admin/adminRemoveButton.js"></script><!-- Evento do botão para remover administradores -->
+    <script type="text/javascript" src = "../scripts/admin/createRegistersTableButton.js"></script><!-- Evento do botão para criar a tabela de registros -->
+    <script type="text/javascript" src = "../scripts/admin/createSessionsTableButton.js"></script><!-- Evento do botão para criar a tabela de sessões -->
+    <script type="text/javascript" src = "../scripts/admin/deleteDataButton.js"></script><!-- Evento do botão para excluir usuários -->
+    <script type="text/javascript" src = "../scripts/admin/dropRegistersTableButton.js"></script><!-- Evento do botão para excluir a tabela de registros -->
+    <script type="text/javascript" src = "../scripts/admin/dropSessionsTableButton.js"></script><!-- Evento do botão para excluir a tabela de sessões -->
     <script type="text/javascript" src = "../scripts/admin/trSelect.js"></script>
 </body>
 </html>

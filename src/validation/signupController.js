@@ -39,23 +39,28 @@ exports.signupController = (req, res, next) => {
     connection.connect(function(e) {
         let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
         connection.query(query, (err, row) => {
-            if(row.length != 0) {
-                database.close(connection);
-                let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
-                return res.render("index", {error: {
-                    type: "\"EmailExists\"",
-                    message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
-                }});
+            if(row) {
+                if(row.length != 0) {
+                    database.close(connection);
+                    let loginButton = "<button type = 'button' class = 'open-form-buttons' id = 'open-form-login' onclick = 'openForms(); callLoginForm();'>Faça o login</button>";
+                    return res.render("index", {error: {
+                        type: "\"EmailExists\"",
+                        message: `\"O e-mail que você inseriu já está cadastrado! ${loginButton}\"`
+                    }});
+                } else {
+                    const userId = uuidv4();
+                    connection.query(`
+                        INSERT INTO registers (userId, firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                        [userId, firstName, lastName, date, gender, email, phone, password, false]
+                    );
+                    const sessionId = createSession(connection, userId);
+                    createCookie(res, "sessionId", sessionId);
+                    database.close(connection);
+                    return res.redirect("../home");
+                };
             } else {
-                const userId = uuidv4();
-                connection.query(`
-                    INSERT INTO registers (userId, firstName, lastName, date, gender, email, phone, password, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                    [userId, firstName, lastName, date, gender, email, phone, password, false]
-                );
-                const sessionId = createSession(connection, userId);
-                createCookie(res, "sessionId", sessionId);
                 database.close(connection);
-                return res.redirect("../home");
+                return res.redirect("/");
             };
         });
     });

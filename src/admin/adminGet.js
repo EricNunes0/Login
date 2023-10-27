@@ -1,5 +1,5 @@
-const database = require("./database");
-const getCookie = require("./cookies/getCookie");
+const database = require("../database");
+const getCookie = require("../cookies/getCookie");
 
 module.exports = (req, res, next) => {
     let sessionId = getCookie(req, "sessionId");

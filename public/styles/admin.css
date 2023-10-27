@@ -1,12 +1,12 @@
 :root {
     --admin-main-background-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9));
     --controls-open-height: 30px;
-    --controls-button-size: 50px;
+    --controls-button-size: 40px;
     --controls-button-margin: 10px;
     --table-border-radius: 10px;
     --popup-width: 300px;
     --popup-height: 50px;
-    --popup-color: #202a30;
+    --popup-color: #151a20;
 }
 
 * {
@@ -46,6 +46,12 @@ html, body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     opacity: 1;
     transition: all 0.3s;
+    animation: PopupReveal 0.1s ease-out 1;
+}
+@keyframes PopupReveal {
+    0% {
+        transform: translateY(-10px);
+    }
 }
 
 .popups[class~="closed"] {
@@ -63,14 +69,13 @@ html, body {
     width: 100%;
     height: 5px;
     border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     transition: all 0.3s;
 }
 
 .popups[class~="green"] > .popup-bars {
     background-color: #20ff60;
 }
-.popups[class~="red"] > .popup-bar {
+.popups[class~="red"] > .popup-bars {
     background-color: #f02020;
 }
 

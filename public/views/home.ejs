@@ -140,6 +140,32 @@
         document.querySelector("#navigation-output").innerHTML = navigation;
     </script>
     <main id = "home-main">
+        <aside id = "home-aside">
+            <div id = "home-menu">
+                <ul id = "home-menu-list">
+                    <li class = "home-menu-items">
+                        <button type = "button" class = "home-menu-buttons selected" id = "menu-main-button">
+                            <div class = "home-menu-icon-divs">
+                                <img class = "home-menu-icons" src = "../svgs/home/user.svg"></img>
+                            </div>
+                            <div class = "home-menu-text-divs">
+                                <p class = "home-menu-texts">Início</p>
+                            </div>
+                        </button>
+                    </li>
+                    <li class = "home-menu-items">
+                        <button type = "button" class = "home-menu-buttons" id = "menu-info-button">
+                            <div class = "home-menu-icon-divs">
+                                <img class = "home-menu-icons" src = "../svgs/home/info.svg"></img>
+                            </div>
+                            <div class = "home-menu-text-divs">
+                                <p class = "home-menu-texts">Informações pessoais</p>
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </aside>
         <div id = "home-area">
             <section class = "home-area-divs" id = "home-texts-div">
                 <div id = "user-icon-button-div">
@@ -204,6 +230,7 @@
     <script type = "text/javascript" src = "../scripts/home/fixedMenuClose.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMenuEvent.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMenuOpen.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/homeMenuButtons.js"></script>
     <script type = "text/javascript" src = "../scripts/home/loadingAreaClose.js"></script>
     <script type = "text/javascript" src = "../scripts/home/loadingAreaOpen.js"></script>
     <script type = "text/javascript" src = "../scripts/home/logoutIcon.js"></script>
