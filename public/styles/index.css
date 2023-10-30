@@ -12,6 +12,7 @@
     --mobile-button-top: 18px;
     --mobile-button-left: 4px;
     --return-button-color: #1fff62;
+    --google-colors-size: 10px;
 }
 
 * {
@@ -447,6 +448,139 @@ img, svg {
 /* Div do botão de retornar */
 #return-button-div {
     margin-top: 10px;
+}
+
+/* Sessão do google */
+#google-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Div "ou" */
+#google-or-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+/* "Ou" */
+#google-or {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Botão do google */
+#google-button {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background-color: #fff;
+    background-size: 200% 2px;
+    background-position: 0% calc(100%);
+    background-repeat: repeat-x;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px;
+    transition: all 0.3s;
+}
+#google-button:hover {
+    filter: contrast(0.8);
+}
+#google-button[class~="on"] {
+    background-image: linear-gradient(90deg,
+        #E04030 0%, #E04030 25%,
+        #FABA05 26%, #FABA05 50%,
+        #35AA50 51%, #35AA50 75%,
+        #4085F5 76%, #4085F5 100%
+    );
+    animation: GoogleButton 1s linear infinite;
+}
+@keyframes GoogleButton {
+    100% {
+        background-position-x: 200%;
+    }
+}
+
+/* Ícone do google */
+#google-button-icon {
+    width: 24px;
+    height: 24px;
+}
+
+#google-colors-div {
+    position: absolute;
+    width: 100%;
+}
+
+/* Cores da logo do google */
+.google-colors {
+    position: absolute;
+    display: block;
+    transition: all 0.3s;
+}
+
+@keyframes GoogleColors {
+    50% {
+        transform: translateY(-3px);
+    }
+}
+.google-colors {
+    top: -15px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    background-image: url("../svgs/index/google.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#google-button[class~="on"] > #google-colors-div > .google-colors {
+    background-image: none;
+    top: unset;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: GoogleColors 1s ease-in-out infinite;
+}
+#google-button[class~="on"] > #google-colors-div > .google-colors.red {
+    left: calc(calc(50% - calc(var(--google-colors-size) / 2)) - 30px);
+    background-color: #E04030;
+    animation-delay: 0s;
+}
+#google-button[class~="on"] > #google-colors-div > .google-colors.yellow {
+    left: calc(calc(50% - calc(var(--google-colors-size) / 2)) - 10px);
+    background-color: #FABA05;
+    animation-delay: 0.1s;
+}
+#google-button[class~="on"] > #google-colors-div > .google-colors.green {
+    left: calc(calc(50% - calc(var(--google-colors-size) / 2)) + 10px);
+    background-color: #35AA50;
+    animation-delay: 0.2s;
+}
+#google-button[class~="on"] > #google-colors-div > .google-colors.blue {
+    left: calc(calc(50% - calc(var(--google-colors-size) / 2)) + 30px);
+    background-color: #4085F5;
+    animation-delay: 0.3s;
+}
+
+/* Texto do google */
+#google-button-text {
+    color: #000;
+    font-size: 18px;
+    margin-left: 45px;
+}
+#google-button[class~="on"] > #google-button-text-div > #google-button-text {
+    color: transparent;
 }
 
 /* Botão de retornar */

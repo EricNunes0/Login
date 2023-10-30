@@ -1,0 +1,23 @@
+<svg id="eptlG0nykIu1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 260 165" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+    <style>
+        <![CDATA[
+            #eptlG0nykIu2_to {animation: eptlG0nykIu2_to__to 1000ms linear infinite normal forwards}@keyframes eptlG0nykIu2_to__to { 0% {transform: translate(130px,85px);animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 50% {transform: translate(130px,80px);animation-timing-function: cubic-bezier(0.42,0,0.58,1)} 100% {transform: translate(130px,85px)}}
+        ]]>
+    </style>
+    <g id="eptlG0nykIu2_to" transform="translate(130,85)">
+        <g transform="translate(-130,-90)">
+            <rect width="240" height="160" rx="15" ry="15" transform="translate(10 10)" fill="#f5f5f5" stroke-width="0"/>
+            <rect width="230" height="150" rx="12" ry="12" transform="translate(15 15)" fill="#e0e0e0" stroke-width="0"/>
+            <ellipse rx="45" ry="45" transform="translate(70 110)" fill="#3060ff" stroke-width="0"/>
+            <ellipse rx="12.5" ry="12.5" transform="translate(70 92.5)" fill="#fff" stroke-width="0"/>
+            <ellipse rx="30" ry="17.5" transform="translate(70 131.5)" fill="#fff" stroke-width="0"/>
+            <rect width="25" height="25" rx="6" ry="6" transform="translate(25 25)" fill="none" stroke="#808080"/>
+            <line x1="-82.666283" y1="0" x2="82.666283" y2="0" transform="translate(146.066801 37.5)" fill="none" stroke="#808080"/>
+            <line x1="-82.666283" y1="0" x2="64.340439" y2="0" transform="matrix(.680241 0 0 1 181.232995 80)" fill="none" stroke="#808080"/>
+            <line x1="-82.666283" y1="0" x2="64.340439" y2="0" transform="matrix(.680241 0 0 1 181.232995 95)" fill="none" stroke="#808080"/>
+            <line x1="-82.666283" y1="0" x2="64.340439" y2="0" transform="matrix(.680241 0 0 1 181.232995 110)" fill="none" stroke="#808080"/>
+            <line x1="-82.666283" y1="0" x2="64.340439" y2="0" transform="matrix(.680241 0 0 1 181.232995 125)" fill="none" stroke="#808080"/>
+            <line x1="-82.666283" y1="0" x2="34.939095" y2="0" transform="matrix(.680241 0 0 1 181.232995 140)" fill="none" stroke="#808080"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,186 @@
+#info-area {
+    max-width: 100vw;
+}
+
+.info-titles {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 50px;
+    text-align: center;
+}
+
+.info-subtitles {
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 24px;
+    word-break: break-word;
+    word-wrap: break-word;
+    color: #d0d0d0;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#info-texts-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+}
+
+#info-article {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 15px 0;
+}
+
+#info-article-title {
+    font-size: 32px;
+    text-align: left;
+}
+
+#info-article-image {
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+}
+#info-article-image[class~="spin"] {
+    animation: InfoArticleImage 1s linear infinite;
+}
+@keyframes InfoArticleImage {
+    100% {
+        transform: perspective(300px) rotateY(360deg);
+    }
+}
+
+#info-main {
+    width: 100%;
+}
+
+.info-modals {
+    width: 100%;
+    border: 1px solid #505050;
+    border-radius: 10px;
+}
+
+.info-modals-divs {
+    width: 100%;
+    height: 100%;
+}
+
+.info-modals-texts-divs {
+    margin: 10px 0;
+}
+
+.info-modals-subtitles {
+    color: #d0d0d0;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 24px;
+    text-align: center;
+    word-break: break-word;
+    word-wrap: break-word;
+    margin-top: 5px;;
+}
+
+.info-modals-info-divs {
+    width: 100%;
+}
+
+.info-modals-buttons {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+}
+.info-modals-buttons:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modals-buttons-flex {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.modals-buttons-divs {
+    width: -webkit-fill-available;
+}
+
+.modals-buttons-title-divs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modals-buttons-titles {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    line-height: 16px;
+    text-align: left;
+    text-transform: none;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    color: #d0d0d0;
+    margin: 0;
+    padding: 0;
+}
+
+.modals-buttons-result-divs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modals-buttons-results {
+    width: 100%;
+    color: #e0e0e0;
+    font-size: 18px;
+    font-weight: 100;
+    letter-spacing: 0.1px;
+    line-height: 18px;
+    text-align: left;
+    text-transform: none;
+    hyphens: auto;
+    word-break:keep-all;
+    word-wrap: break-word;
+    margin: 0;
+    padding: 0;
+}
+
+.modals-buttons-edit-divs {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.edit-icons {
+    width: 30px;
+    height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    #info-article-image-section {
+        display: none;
+    }
+
+    #info-article-title {
+        text-align: center;
+    }
+}

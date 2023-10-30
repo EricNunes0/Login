@@ -7,6 +7,7 @@
     <link rel = "icon" href = "../svgs/logo.svg"/>
     <link rel = "stylesheet" href = "../styles/output.css"/>
     <link rel = "stylesheet" href = "../styles/home.css"/>
+    <link rel = "stylesheet" href = "../styles/homeInfoArea.css"/>
     <link rel = "stylesheet" href = "../styles/navigation.css"/>
 </head>
 <body>
@@ -144,7 +145,7 @@
             <div id = "home-menu">
                 <ul id = "home-menu-list">
                     <li class = "home-menu-items">
-                        <button type = "button" class = "home-menu-buttons selected" id = "menu-main-button">
+                        <button type = "button" class = "home-menu-buttons selected" id = "menu-user-button">
                             <div class = "home-menu-icon-divs">
                                 <img class = "home-menu-icons" src = "../svgs/home/user.svg"></img>
                             </div>
@@ -167,52 +168,71 @@
             </div>
         </aside>
         <div id = "home-area">
-            <section class = "home-area-divs" id = "home-texts-div">
-                <div id = "user-icon-button-div">
-                    <button id = "user-icon-button" onclick="fixedMenuOpen()">
-                        <img id = "user-icon" src = "../images/usericon.png"></img>
-                    </button>
-                </div>
-                    <h1 id = "welcome-message"></h1>
-                <p id = "home-online-text">Você está online!</p>
-            </section>
-            <section class = "home-area-divs" id = "home-main-div">
-                <div id = "home-main-area">
-                    <button type = "button" class = "home-main-buttons" id = "custom-button" onclick="fixedMenuOpen()">
-                        <div id = "custom-area">
-                            <div class = "main-texts-divs" id = "custom-texts-div">
-                                <div id = "custom-title-div">
-                                    <h1 id = "custom-title">Customização</h1>
-                                </div>
-                                <div id = "custom-description-div">
-                                    <p id = "custom-description">Personalize a sua conta para deixá-la com a sua cara</p>
-                                </div>
-                            </div>
-                            <div id = "custom-icon-div">
-                                <img id = "custom-icon" src = "../svgs/home/custom.svg"></img>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </section>
-            <section class = "home-area-divs" id = "home-logout-div">
-                <div id = "home-logout-button-div">
-                    <a href = "/" id = "home-logout-button-link">
-                        <button type = "button" id = "home-logout-button">
-                            <div id = "logout-button-icon-div">
-                                <svg id = "logout-button-icon" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 1280.000000 1085.000000" preserveAspectRatio="xMidYMid meet">
-                                    <g id = "logout-icon-g" transform="translate(0.000000,1085.000000) scale(0.100000,-0.100000)" stroke="none">
-                                        <path d="M3449 10837 c-20 -8 -49 -23 -65 -35 -59 -43 -3343 -3338 -3360 -3372 -23 -45 -24 -143 -2 -190 8 -19 431 -533 939 -1141 508 -608 1228 -1470 1599 -1915 371 -445 702 -840 734 -878 75 -87 142 -122 218 -113 68 8 126 43 163 97 l30 45 3 1166 2 1166 78 17 c328 69 819 116 1217 116 1668 -1 3233 -594 4555 -1725 1068 -914 1997 -2192 2736 -3768 117 -250 150 -289 256 -303 68 -9 126 12 179 65 74 73 77 95 45 346 -256 1983 -832 3673 -1689 4955 -571 853 -1262 1536 -2077 2052 -924 585 -2011 947 -3190 1063 -297 29 -484 37 -840 37 -443 -1 -800 -24 -1157 -76 l-83 -12 -2 1131 c-3 1030 -4 1133 -20 1160 -21 39 -65 83 -101 102 -41 21 -125 26 -168 10z"/>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div id = "logout-button-text-div">
-                                <a href="/logout" id = "logout-button-text">Log Out</a>
-                            </div>
+            <div class = "areas selected" id = "user-area">
+                <section class = "home-area-divs" id = "home-texts-div">
+                    <div id = "user-icon-button-div">
+                        <button id = "user-icon-button" onclick="fixedMenuOpen()">
+                            <img id = "user-icon" src = "../images/usericon.png"></img>
                         </button>
-                    </a>
+                    </div>
+                    <h1 id = "welcome-message"></h1>
+                    <p id = "home-online-text">Você está online!</p>
+                </section>
+                <div id = "buttons-logout-flex">
+                    <section class = "home-area-divs" id = "home-buttons-div">
+                        <div id = "home-main-area">
+                            <button type = "button" class = "home-main-buttons" id = "info-button" onclick="homeAreaInfo()">
+                                <div id = "custom-area">
+                                    <div class = "main-texts-divs">
+                                        <div class = "main-button-title-divs">
+                                            <h1 class = "main-button-titles">Informações</h1>
+                                        </div>
+                                        <div id = "custom-description-div">
+                                            <p id = "custom-description">Veja todas as suas informações pessoais</p>
+                                        </div>
+                                    </div>
+                                    <div id = "custom-icon-div">
+                                        <img id = "custom-icon" src = "../svgs/home/usercard.svg"></img>
+                                    </div>
+                                </div>
+                            </button>
+                            <button type = "button" class = "home-main-buttons" id = "custom-button" onclick="fixedMenuOpen()">
+                                <div id = "custom-area">
+                                    <div class = "main-texts-divs" id = "custom-texts-div">
+                                        <div class = "main-button-title-divs">
+                                            <h1 class = "main-button-titles">Customização</h1>
+                                        </div>
+                                        <div id = "custom-description-div">
+                                            <p id = "custom-description">Personalize a sua conta para deixá-la com a sua cara</p>
+                                        </div>
+                                    </div>
+                                    <div id = "custom-icon-div">
+                                        <img id = "custom-icon" src = "../svgs/home/custom.svg"></img>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </section>
+                    <section class = "home-area-divs" id = "home-logout-div">
+                        <div id = "home-logout-button-div">
+                            <a href = "/" id = "home-logout-button-link">
+                                <button type = "button" id = "home-logout-button">
+                                    <div id = "logout-button-icon-div">
+                                        <svg id = "logout-button-icon" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 1280.000000 1085.000000" preserveAspectRatio="xMidYMid meet">
+                                            <g id = "logout-icon-g" transform="translate(0.000000,1085.000000) scale(0.100000,-0.100000)" stroke="none">
+                                                <path d="M3449 10837 c-20 -8 -49 -23 -65 -35 -59 -43 -3343 -3338 -3360 -3372 -23 -45 -24 -143 -2 -190 8 -19 431 -533 939 -1141 508 -608 1228 -1470 1599 -1915 371 -445 702 -840 734 -878 75 -87 142 -122 218 -113 68 8 126 43 163 97 l30 45 3 1166 2 1166 78 17 c328 69 819 116 1217 116 1668 -1 3233 -594 4555 -1725 1068 -914 1997 -2192 2736 -3768 117 -250 150 -289 256 -303 68 -9 126 12 179 65 74 73 77 95 45 346 -256 1983 -832 3673 -1689 4955 -571 853 -1262 1536 -2077 2052 -924 585 -2011 947 -3190 1063 -297 29 -484 37 -840 37 -443 -1 -800 -24 -1157 -76 l-83 -12 -2 1131 c-3 1030 -4 1133 -20 1160 -21 39 -65 83 -101 102 -41 21 -125 26 -168 10z"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div id = "logout-button-text-div">
+                                        <a href="/logout" id = "logout-button-text">Log Out</a>
+                                    </div>
+                                </button>
+                            </a>
+                        </div>
+                    </section>
                 </div>
-            </section>
+            </div>
         </div>
     </main>
     <script type = "text/javascript" src = "../scripts/home/alterCancel.js"></script>
@@ -231,6 +251,7 @@
     <script type = "text/javascript" src = "../scripts/home/fixedMenuEvent.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMenuOpen.js"></script>
     <script type = "text/javascript" src = "../scripts/home/homeMenuButtons.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/infoArticleImage.js" defer></script>
     <script type = "text/javascript" src = "../scripts/home/loadingAreaClose.js"></script>
     <script type = "text/javascript" src = "../scripts/home/loadingAreaOpen.js"></script>
     <script type = "text/javascript" src = "../scripts/home/logoutIcon.js"></script>
@@ -258,6 +279,12 @@
     <script type = "text/javascript" src = "../scripts/home/userIconSet.js"></script>
     <script type = "text/javascript">
         var standardUserIcon = "../images/usericon.png";
+        /* Home Info */
+        let homeInfo = `<%- include("homeInfoArea.ejs") %>`;
+        let parser = new DOMParser();
+        let homeInfoHtml = parser.parseFromString(homeInfo, 'text/html');
+        document.querySelector("#home-area").appendChild(homeInfoHtml.body.querySelector(".areas"));
+
         <% if(typeof user !="undefined" && user) { %>
             const welcomeMessage = document.querySelector("#welcome-message");
             const fixedMainIcon = document.querySelector("#fixed-main-icon");
@@ -267,18 +294,36 @@
                 var userId = user.userId;
                 const firstName = user.firstName;
                 const lastName = user.lastName;
+                const date = new Date(user.date);
                 const gender = user.gender;
+                const email = user.email;
+                const phone = user.phone;
                 const icon = user.icon;
+
+                const day = date.getDate();
+                let month = parseInt(date.getMonth() + 1);
+                const year = date.getFullYear();
+                if(month <= 9) {
+                    month = `0${month}`;
+                }
+                document.querySelector("#user-name").innerHTML = `${firstName} ${lastName}`;
+                document.querySelector("#user-date").innerHTML = `${day}/${month}/${year}`;
+                document.querySelector("#user-email").innerHTML = `${email}`;
+                document.querySelector("#user-phone").innerHTML = `${phone}`;
+
                 let welcomeMsg = "";
                 switch(gender) {
                     case "M":
                         welcomeMsg = "Bem-vindo";
+                        document.querySelector("#user-gender").innerHTML = `Masculino`;
                         break;
                     case "F":
                         welcomeMsg = "Bem-vinda";
+                        document.querySelector("#user-gender").innerHTML = `Feminino`;
                         break;
                     default:
                         welcomeMsg = "Bem-vindo(a)";
+                        document.querySelector("#user-gender").innerHTML = `Outro`;
                         break;
                 };
                 welcomeMsg = welcomeMsg + `, ${firstName} ${lastName}!`;
