@@ -5,6 +5,8 @@
     --confirm-buttons-icons-height: 18px;
     --confirm-close-buttons-width: 48px;
     --confirm-close-buttons-height: 48px;
+    --crop-arrows-size: 33.333%;
+    --crop-square-size: 100px;
     --fixed-button-size: 48px;
     --fixed-div-width: 400px;
     --fixed-header-height: 56px;
@@ -215,7 +217,6 @@ img, svg {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    outline: 3px solid #a0a0a0;
     transition: all 0.3s;
 }
 #fixed-main-icon-button:hover > #fixed-main-icon {
@@ -377,14 +378,30 @@ img, svg {
 
 /* Divs dos ícones */
 .icon-divs {
-    width: var(--icon-width);
-    height: var(--icon-height);
+    /*min-width: var(--icon-width);
+    min-height: var(--icon-height);*/
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px 0;
     border-radius: 5px;
     outline: 3px double #a0a0a0;
+}
+
+/* Div do ícone novo */
+#new-icon-div {
+    position: relative;
+}
+
+#new-icon {
+    max-width: 100%;
+    max-height: unset;
+}
+
+/* Canvas do ícone novo */
+#new-icon-canvas {
+    width: unset;
+    max-width: 400px;
 }
 
 /* Ícones */
@@ -403,6 +420,92 @@ img, svg {
     width: calc(var(--icon-width) / 4);
     height: calc(var(--icon-height) / 4);
     object-fit: contain;
+}
+
+/* Div de crop */
+#crop-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Quadrado do crop */
+#crop-square {
+    cursor: move;
+    position: absolute;
+    /*top: calc(50% - calc(var(--crop-square-size) / 2));
+    left: calc(50% - calc(var(--crop-square-size) / 2));*/
+    min-width: var(--crop-square-size);
+    min-height: var(--crop-square-size);
+    max-width: 100%;
+    max-height: 100%;
+    background-image: url("../svgs/home/crop-circle.svg");
+    background-position: center;
+    background-size: 100% 100%;
+    border: 2px solid #a0a0a0;
+}
+
+/* Setas do crop */
+.crop-arrows {
+    position: absolute;
+    z-index: 1;
+    height: var(--crop-arrows-size);
+    width: var(--crop-arrows-size);
+    outline: none;
+}
+.crop-arrows.top-left {
+    cursor: nw-resize;
+    top: 0;
+    left: 0;
+    background-color: red;
+    box-shadow: -5px -5px #fff;
+}
+.crop-arrows.top {
+    cursor: n-resize;
+    top: 0;
+    left: calc(50% - calc(var(--crop-arrows-size)) / 2);
+    background-color: orange;
+}
+.crop-arrows.top-right {
+    cursor: ne-resize;
+    top: 0;
+    left: calc(100% - var(--crop-arrows-size));
+    background-color: yellow;
+    box-shadow: 5px -5px #fff;
+}
+.crop-arrows.left {
+    cursor: w-resize;
+    top: calc(50% - calc(var(--crop-arrows-size)) / 2);
+    left: 0;
+    background-color: green;
+}
+.crop-arrows.right {
+    cursor: e-resize;
+    top: calc(50% - calc(var(--crop-arrows-size)) / 2);
+    left: calc(100% - var(--crop-arrows-size));
+    background-color: cyan;
+}
+.crop-arrows.bottom-left {
+    cursor: sw-resize;
+    top: calc(100% - var(--crop-arrows-size));
+    left: 0;
+    background-color: blue;
+    box-shadow: -5px 5px #fff;
+}
+.crop-arrows.bottom {
+    cursor: s-resize;
+    top: calc(100% - var(--crop-arrows-size));
+    left: calc(50% - calc(var(--crop-arrows-size)) / 2);
+    background-color: purple;
+}
+.crop-arrows.bottom-right {
+    cursor: se-resize;
+    top: calc(100% - var(--crop-arrows-size));
+    left: calc(100% - var(--crop-arrows-size));
+    background-color: magenta;
+    box-shadow: 5px 5px #fff;
 }
 
 /* Div dos botões de novo ícone */
@@ -544,7 +647,7 @@ img, svg {
 .popups[class~="green"] > .popup-bars {
     background-color: #20ff60;
 }
-.popups[class~="red"] > .popup-bar {
+.popups[class~="red"] > .popup-bars {
     background-color: #f02020;
 }
 

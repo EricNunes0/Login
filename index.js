@@ -3,11 +3,13 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const dotenv = require("dotenv").config();
+const passport = require("passport");
+require("./src/validation/passportConfigs")
 const session = require("express-session");
 const { v4: uuidv4 } = require("uuid");
 const database = require("./src/database");
 const register = require("./src/register");
-const dotenv = require("dotenv").config();
 const adminAdd = require("./src/admin/adminAdd");
 const adminGet = require("./src/admin/adminGet");
 const adminPost = require("./src/admin/adminPost");
@@ -73,7 +75,9 @@ app.get("/signup", (req, res, next) => {
 
 app.post("/signup", signupValidator.form, signController.signupController);
 
-app.get("/auth/google", authGoogle.validate);
+app.get("/auth/google", passport.authenticate("google", {scope: ["profile", "email"]}));
+
+app.get("/auth/google/callback", passport.authenticate('google', {failureRedirect: '/'}), authGoogle.callback);
 
 app.get("/home", homeGet);
 

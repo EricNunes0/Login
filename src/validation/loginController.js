@@ -2,7 +2,6 @@ const database = require("../database");
 const { validationResult, matchedData } = require("express-validator");
 const createCookie = require("../cookies/createCookie");
 const createSession = require("../sessions/createSession");
-const { v4: uuidv4 } = require("uuid");
 
 exports.loginController = (req, res, next) => {
     const body = req.body;
