@@ -1,8 +1,5 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
-const dotenv = require("dotenv").config();
-
-console.log("📄 Passaporte 📄");
 
 passport.use(
     new GoogleStrategy({

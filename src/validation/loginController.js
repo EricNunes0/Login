@@ -33,6 +33,8 @@ exports.loginController = (req, res, next) => {
     connection.connect(function(e) {
         let query = `SELECT * FROM registers WHERE email = '${email}' LIMIT 1;`;
         connection.query(query, (err, row) => {
+            if(err) {throw new Error(err)};
+            console.log("Cheguei aqui");
             console.log(query, email, row);
             if(row) {
                 if(row.length == 0) {

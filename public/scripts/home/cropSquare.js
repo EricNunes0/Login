@@ -25,6 +25,14 @@ function checkSquarePositions() {
     return true;
 };
 
+function getHeight(obj) {
+    return parseInt(obj.style.height.slice(0, 2));
+};
+
+function getLeft(obj) {
+    return parseInt(obj.style.left.slice(0, 2));
+};
+
 cropArrowBottom.addEventListener("mousedown", (e) => {
     const cropSquare = document.querySelector("#crop-square");
     let oldY = parseInt(cropSquare.style.height.slice(0, -2));
@@ -52,7 +60,7 @@ cropArrowBottom.addEventListener("mousedown", (e) => {
                 cropSquare.style.width = newY + "px";
                 cropSquare.style.height = newY + "px";
                 if(checkSquarePositions()) {
-                    cropSquare.style.left = `${(parseInt(cropSquare.style.left.slice(0, 2))) + ((gapY + moveY) / 2)}px`;
+                    cropSquare.style.left = `${getLeft(cropSquare)}px`;
                     console.error(cropSquare.style.left);
                     cropArrowBottom.style.backgroundColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`;
                 }

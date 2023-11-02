@@ -3,7 +3,7 @@ const axios = require("axios");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const passport = require("passport");
 require("./src/validation/passportConfigs")
 const session = require("express-session");
