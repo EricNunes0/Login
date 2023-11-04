@@ -8,7 +8,9 @@ function popupRunAnimation(popup) {
             percent--;
             if(percent === 0) {
                 clearInterval(popupInterval);
-                popupDelete(popup);
+                if(popup) {
+                    popupDelete(popup);
+                };
             };
         }, (popupAnimationDuration / 100) * 1000);
     };

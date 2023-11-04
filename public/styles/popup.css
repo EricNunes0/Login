@@ -1,0 +1,148 @@
+:root {
+    --popup-red: #f02020;
+    --popup-yellow: #f0d020;
+    --popup-green: #20ff60;
+    --popup-blue: #20a0f0;
+    --popup-width: 300px;
+    --popup-height: 40px;
+    --popup-color: #202a30;
+}
+
+/* Área fixa do popup */
+#popup-fixed {
+    pointer-events: none;
+    position: fixed;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popups */
+.popups {
+    position: absolute;
+    bottom: calc(0px + calc(var(--popup-height) / 2));
+    min-width: var(--popup-width);
+    height: var(--popup-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--popup-color);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+.popups[class~="closed"] {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+/* Barras do popup */
+.popup-bars {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: all 0.3s;
+}
+
+.popups[class~="green"] > .popup-bars {
+    background-color: var(--popup-green);
+    filter: drop-shadow(0px 0px 1px var(--popup-green));
+}
+.popups[class~="red"] > .popup-bars {
+    background-color: var(--popup-red);
+    filter: drop-shadow(0px 0px 1px var(--popup-red));
+}
+.popups[class~="yellow"] > .popup-bars {
+    background-color: var(--popup-yellow);
+    filter: drop-shadow(0px 0px 1px var(--popup-yellow));
+}
+.popups[class~="blue"] > .popup-bars {
+    background-color: var(--popup-blue);
+    filter: drop-shadow(0px 0px 1px var(--popup-blue));
+}
+/* Ícones dos popups */
+.popup-icons {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-size: 100% 100%;
+    margin-right: 10px;
+}
+.popup-icons[class~="green"] {
+    background-image: url("../svgs/popups/checked.svg");
+}
+.popup-icons[class~="red"] {
+    background-image: url("../svgs/popups/error.svg");
+}
+.popup-icons[class~="yellow"] {
+    background-image: url("../svgs/popups/warning.svg");
+}
+.popup-icons[class~="blue"] {
+    background-image: url("../svgs/popups/info.svg");
+}
+
+/* Divs das mensagens do popup */
+.popup-message-divs {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Mensagens dos popups */
+.popup-messages {
+    color: #fff;
+    font-size: 14px;
+}
+
+.popups[class~="green"] > .popup-message-divs > .popup-messages::before {
+    content: "Sucesso: ";
+    color: var(--popup-green);
+    text-shadow: 0px 0px 1px var(--popup-green);
+}
+.popups[class~="red"] > .popup-message-divs > .popup-messages::before {
+    content: "Erro: ";
+    color: var(--popup-red);
+    text-shadow: 0px 0px 1px var(--popup-red);
+}
+.popups[class~="yellow"] > .popup-message-divs > .popup-messages::before {
+    content: "Atenção: ";
+    color: var(--popup-yellow);
+    text-shadow: 0px 0px 1px var(--popup-yellow);
+}
+.popups[class~="blue"] > .popup-message-divs > .popup-messages::before {
+    content: "Info: ";
+    color: var(--popup-blue);
+    text-shadow: 0px 0px 1px var(--popup-blue);
+}
+
+/* Botões de fechar popups */
+.popup-buttons {
+    pointer-events: all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    background-image: url("../svgs/popups/close.svg");
+    background-size: 90% 90%;
+    background-position: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+.popup-buttons:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}

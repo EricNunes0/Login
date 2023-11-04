@@ -8,6 +8,7 @@
     <link rel = "stylesheet" href = "../styles/output.css"/>
     <link rel = "stylesheet" href = "../styles/admin.css"/>
     <link rel = "stylesheet" href = "../styles/navigation.css"/>
+    <link rel = "stylesheet" href = "../styles/popup.css"/>
     <script type="text/javascript" src = "../scripts/admin/controlsButtonCreate.js"></script>
     <script type = "text/javascript" src = "../scripts/admin/CreateTableData.js"></script>
     <script type = "text/javascript" src = "../scripts/admin/CreateTableRow.js"></script>
@@ -48,13 +49,13 @@
                 </div>
             </div>
         </section>
-        <div id = "popup-absolute"></div>
+        <div id = "popup-fixed"></div>
     </main>
     <script type="text/javascript" src = "../scripts/admin/getTableRowsSelected.js"></script>
     <script type="text/javascript" src = "../scripts/admin/openControls.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/popupCreate.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/popupDelete.js"></script>
-    <script type="text/javascript" src = "../scripts/admin/popupRunAnimation.js"></script>
+    <script type="text/javascript" src = "../scripts/functions/popupCreate.js"></script>
+    <script type="text/javascript" src = "../scripts/functions/popupDelete.js"></script>
+    <script type="text/javascript" src = "../scripts/functions/popupRunAnimation.js"></script>
     <script type = "text/javascript">
         /* Criando botões de configuração */
         controlsButtonCreate({id: "create-registers-table-button", icon: "../svgs/admin/silhouetteplus.svg", text: "Criar tabela de cadastros"});

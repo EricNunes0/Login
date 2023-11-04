@@ -1,5 +1,6 @@
 const database = require("../database");
 const getCookie = require("../cookies/getCookie");
+const deleteCookie = require("../cookies/deleteCookie");
 
 module.exports = (req, res, next) => {
     let sessionId = getCookie(req, "sessionId");

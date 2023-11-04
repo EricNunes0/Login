@@ -9,8 +9,10 @@
     <link rel = "stylesheet" href = "../styles/home.css"/>
     <link rel = "stylesheet" href = "../styles/homeInfoArea.css"/>
     <link rel = "stylesheet" href = "../styles/navigation.css"/>
+    <link rel = "stylesheet" href = "../styles/popup.css"/>
 </head>
 <body>
+    <canvas id = "icon-canvas"></canvas>
     <div class ="closed" id = "home-fixed-menu">
         <div id = "fixed-area">
             <div class = "closed" id = "fixed-close-area"></div>
@@ -88,6 +90,20 @@
                         </div>
                     </div>
                 </div>
+                <div id = "crop-controls-div">
+                    <div class = "crop-controls-divs">
+                        <label for = "crop-size" class = "crop-labels">Tamanho:</label>
+                        <input type = "number" class = "crop-controls" id = "crop-size" placeholder="0" maxlength="4"/>
+                    </div>
+                    <div class = "crop-controls-divs">
+                        <label for = "crop-x" class = "crop-labels">X:</label>
+                        <input type = "number" class = "crop-controls" id = "crop-x" placeholder="0" maxlength="4"/>
+                    </div>
+                    <div class = "crop-controls-divs">
+                        <label for = "crop-y" class = "crop-labels">Y:</label>
+                        <input type = "number" class = "crop-controls" id = "crop-y" placeholder="0" maxlength="4"/>
+                    </div>
+                </div>
                 <div id = "confirm-buttons-div">
                     <div class = "confirm-buttons-divs">
                         <button type = "button" class = "confirm-buttons" id = "alter-confirm">
@@ -145,8 +161,7 @@
             </div>
         </div>
     </div>
-    <div id = "popup-absolute">
-    </div>
+    <div id = "popup-fixed"></div>
     <div id = "navigation-output"></div>
     <script>
         let navigation = `<%- include("navigation.ejs") %>`;
@@ -188,7 +203,10 @@
                         </button>
                     </div>
                     <h1 id = "welcome-message"></h1>
-                    <p id = "home-online-text">Você está online!</p>
+                    <div id = "home-online-div">
+                        <i id = "home-online-icon"></i>
+                        <p id = "home-online-text">Você está online!</p>
+                    </div>
                 </section>
                 <div id = "buttons-logout-flex">
                     <section class = "home-area-divs" id = "home-buttons-div">
@@ -252,6 +270,8 @@
     <script type = "text/javascript" src = "../scripts/home/alterIconButton.js"></script>
     <script type = "text/javascript" src = "../scripts/home/alterIconFile.js"></script>
     <script type = "text/javascript" src = "../scripts/home/alterIconInputRemove.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/convertDataToBlob.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/convertFileToData.js"></script>
     <script type = "text/javascript" src = "../scripts/home/cropResize.js"></script>
     <script type = "text/javascript" src = "../scripts/home/cropSquare.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedClosedAreaClose.js"></script>
@@ -259,6 +279,7 @@
     <script type = "text/javascript" src = "../scripts/home/fixedDivClose.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedDivOpen.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMainIconButton.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/fixedMainIconFileRead.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMainIconFileRead.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMainIconSet.js"></script>
     <script type = "text/javascript" src = "../scripts/home/fixedMenuClose.js"></script>
@@ -283,14 +304,15 @@
     <script type = "text/javascript" src = "../scripts/home/oldIconRemove.js"></script>
     <script type = "text/javascript" src = "../scripts/home/oldIconSet.js"></script>
     <script type = "text/javascript" src = "../scripts/home/oldReturnButton.js"></script>
-    <script type = "text/javascript" src = "../scripts/home/popupCreate.js"></script>
-    <script type = "text/javascript" src = "../scripts/home/popupDelete.js"></script>
-    <script type = "text/javascript" src = "../scripts/home/popupRunAnimation.js"></script>
+    <script type = "text/javascript" src = "../scripts/functions/popupCreate.js"></script>
+    <script type = "text/javascript" src = "../scripts/functions/popupDelete.js"></script>
+    <script type = "text/javascript" src = "../scripts/functions/popupRunAnimation.js"></script>
     <script type = "text/javascript" src = "../scripts/home/removeCancel.js"></script>
     <script type = "text/javascript" src = "../scripts/home/removeConfirm.js"></script>
     <script type = "text/javascript" src = "../scripts/home/removeIconAreaClose.js"></script>
     <script type = "text/javascript" src = "../scripts/home/removeIconButton.js"></script>
     <script type = "text/javascript" src = "../scripts/home/userIconFileRead.js"></script>
+    <script type = "text/javascript" src = "../scripts/home/userIconImageSet.js"></script>
     <script type = "text/javascript" src = "../scripts/home/userIconSet.js"></script>
     <script type = "text/javascript">
         var standardUserIcon = "../images/usericon.png";
@@ -299,12 +321,11 @@
         let parser = new DOMParser();
         let homeInfoHtml = parser.parseFromString(homeInfo, 'text/html');
         document.querySelector("#home-area").appendChild(homeInfoHtml.body.querySelector(".areas"));
-
         <% if(typeof user !="undefined" && user) { %>
             const welcomeMessage = document.querySelector("#welcome-message");
             const fixedMainIcon = document.querySelector("#fixed-main-icon");
             var user = <%- JSON.stringify(user) %>;
-            console.log(user);
+            //console.log(user);
             if(user) {
                 var userId = user.userId;
                 const firstName = user.firstName;
@@ -315,6 +336,8 @@
                 const phone = user.phone;
                 const icon = user.icon;
 
+                popupCreate({message: `Seja bem-vindo, ${firstName} ${lastName}`, color: `blue`});
+                
                 const day = date.getDate();
                 let month = parseInt(date.getMonth() + 1);
                 const year = date.getFullYear();

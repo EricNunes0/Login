@@ -1,4 +1,6 @@
 const database = require("../database");
+const createSessionsTable = require("../sessions/createSessionsTable");
+const dropSessionsTable = require("../sessions/dropSessionsTable");
 
 module.exports = (req, res, next) => {
     let body = req.body;

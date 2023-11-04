@@ -1,12 +1,14 @@
 function newIconSet(file) {
-    const newIcon = document.querySelector("#new-icon");
     let reader = new FileReader();
     reader.onload = function(e) {
+        const newIcon = document.querySelector("#new-icon");
         newIcon.src = e.target.result;
-        const newIconWidth = newIcon.offsetWidth;
-        const newIconHeight = newIcon.offsetHeight;
-        console.log(newIconWidth, newIconHeight);
-        cropResize(newIconWidth, newIconHeight);
+        setTimeout(function() {
+            const newIconOffsets = newIcon.getBoundingClientRect();
+            const newIconWidth = parseInt(newIconOffsets.width);
+            const newIconHeight = parseInt(newIconOffsets.height);
+            cropResize(newIconWidth, newIconHeight);
+        }, 100);
     };
     reader.readAsDataURL(file);
 };

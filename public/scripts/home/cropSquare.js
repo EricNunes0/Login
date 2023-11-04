@@ -1,74 +1,101 @@
-const cropArrowTopLeft = document.querySelector(".crop-arrows.top-left");
-const cropArrowTop = document.querySelector(".crop-arrows.top");
-const cropArrowTopRight = document.querySelector(".crop-arrows.top-right");
-const cropArrowLeft = document.querySelector(".crop-arrows.left");
-const cropArrowRight = document.querySelector(".crop-arrows.right");
-const cropArrowBottomLeft = document.querySelector(".crop-arrows.bottom-left");
-const cropArrowBottom = document.querySelector(".crop-arrows.bottom");
-const cropArrowBottomRight = document.querySelector(".crop-arrows.bottom-right");
+const cropSize = document.querySelector("#crop-size");
+const cropX = document.querySelector("#crop-x");
+const cropY = document.querySelector("#crop-y");
 var cropMinimumSize = 100;
 
-
-function getNewIconSizes() {
-    const newIcon = document.querySelector("#new-icon").getBoundingClientRect();
+function cropSquareSizeGet() {
+    const cropSquare = document.querySelector("#crop-square");
     return {
-        width: newIcon.width,
-        height: newIcon.height
+        width: parseInt(cropSquare.style.width.slice(0, -2)),
+        height: parseInt(cropSquare.style.height.slice(0, -2)),
+        top: parseInt(cropSquare.style.top.slice(0, -2)),
+        left: parseInt(cropSquare.style.left.slice(0, -2)),
     }
 };
 
-function checkSquarePositions() {
+function cropSquareSizeSet(size) {
     const cropSquare = document.querySelector("#crop-square");
-    if(parseInt(cropSquare.style.left.slice(0, 2)) < 0) {
-        return false;
+    cropSquare.style.width = size + "px";
+    cropSquare.style.height = size + "px";
+};
+
+function cropSquareXSet(x) {
+    const cropSquare = document.querySelector("#crop-square");
+    cropSquare.style.left = x + "px";
+};
+
+function cropSquareYSet(y) {
+    const cropSquare = document.querySelector("#crop-square");
+    cropSquare.style.top = y + "px";
+};
+
+function cropSizeSet(size) {
+    const cropSize = document.querySelector("#crop-size");
+    cropSize.value = size;
+};
+
+function cropXSet(x) {
+    const cropX = document.querySelector("#crop-x");
+    cropX.value = x;
+};
+
+function cropYSet(y) {
+    const cropY = document.querySelector("#crop-y");
+    cropY.value = y;
+};
+
+cropSize.addEventListener("change", (e) => {
+    let size = parseInt(e.target.value);
+    const cropSquareSizes = cropSquareSizeGet();
+    const top = cropSquareSizes.top;
+    const left = cropSquareSizes.left;
+    const newIcon = document.querySelector("#new-icon");
+    const newIconOffsets = newIcon.getBoundingClientRect();
+    const newIconWidth = newIconOffsets.width;
+    const newIconHeight = newIconOffsets.height;
+    if(size < cropMinimumSize) {
+        e.target.value = cropMinimumSize;
+    } else if(size >= newIconWidth || size >= newIconHeight) {
+        e.target.value = parseInt(newIconWidth) > parseInt(newIconHeight) ? parseInt(newIconHeight) : parseInt(newIconWidth);
+    } else if((top + size) > newIconHeight) {
+        e.target.value = parseInt(newIconHeight - top);
+    } else if((left + size) > newIconWidth) {
+        e.target.value = parseInt(newIconWidth - left);
     };
-    return true;
-};
+    cropSquareSizeSet(e.target.value);
+    return;
+});
 
-function getHeight(obj) {
-    return parseInt(obj.style.height.slice(0, 2));
-};
+/* Evento do crop X */
+cropX.addEventListener("change", (e) => {
+    let x = parseInt(e.target.value);
+    const cropSquareSizes = cropSquareSizeGet();
+    const squareWidth = cropSquareSizes.width;
+    const newIcon = document.querySelector("#new-icon");
+    const newIconOffsets = newIcon.getBoundingClientRect();
+    const newIconWidth = newIconOffsets.width;
+    if(x < 0) {
+        e.target.value = 0;
+    };
+    if(x + squareWidth > newIconWidth) {
+        e.target.value = parseInt(newIconWidth - squareWidth);
+    };
+    cropSquareXSet(e.target.value);
+});
 
-function getLeft(obj) {
-    return parseInt(obj.style.left.slice(0, 2));
-};
-
-cropArrowBottom.addEventListener("mousedown", (e) => {
-    const cropSquare = document.querySelector("#crop-square");
-    let oldY = parseInt(cropSquare.style.height.slice(0, -2));
-    let downRect = e.target.getBoundingClientRect();
-    //let downX = e.clientX - downRect.left;
-    let downY = e.clientY - downRect.top;
-    let gapY = 0;
-    let newY = 0;
-    console.log("Altura original:", oldY);
-    console.log("Altura clicada:", downY);
-    console.log("Nova altura:", newY);
-    popupCreate({message: `Top: ${downY}px`/*; Left: ${downX}px`*/, color: `red`});
-    let active = true;
-    window.addEventListener("mousemove", (e) => {
-        if(active === true) {
-            let moveRect = e.target.getBoundingClientRect();
-            let moveY = e.clientY - moveRect.top;
-
-            gapY = moveY - downY;
-            newY = oldY + gapY;
-            //console.warn("Diferença de altura:", gapY);
-            //console.warn("Nova altura selecionada:", newY);
-            const iconSizes = getNewIconSizes();
-            if(newY > cropMinimumSize && newY < iconSizes.height) {
-                cropSquare.style.width = newY + "px";
-                cropSquare.style.height = newY + "px";
-                if(checkSquarePositions()) {
-                    cropSquare.style.left = `${getLeft(cropSquare)}px`;
-                    console.error(cropSquare.style.left);
-                    cropArrowBottom.style.backgroundColor = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`;
-                }
-            };
-        };
-    });
-
-    window.addEventListener("mouseup", () => {
-        active = false;
-    });
+/* Evento do crop Y */
+cropY.addEventListener("change", (e) => {
+    let y = parseInt(e.target.value);
+    const cropSquareSizes = cropSquareSizeGet();
+    const squareHeight= cropSquareSizes.height;
+    const newIcon = document.querySelector("#new-icon");
+    const newIconOffsets = newIcon.getBoundingClientRect();
+    const newIconHeight = newIconOffsets.height;
+    if(y < 0) {
+        e.target.value = 0;
+    };
+    if(y + squareHeight > newIconHeight) {
+        e.target.value = parseInt(newIconHeight - squareHeight);
+    };
+    cropSquareYSet(e.target.value);
 });

@@ -4,19 +4,32 @@ function cropResize(width, height) {
 
     width = width < minSize ? minSize : width;
     height = height < minSize ? minSize : height;
-    console.log(width, height)
     if(width >= height) {
         /* Altura predominante */
+        let size = height;
+        let x = (width - height) / 2;
+        let y = 0;
+        /* Configurando */
         cropSquare.style.width = height + "px";
         cropSquare.style.height = height + "px";
-        cropSquare.style.top = 0;
-        cropSquare.style.left = `${(width - height) / 2}px`;
+        cropSquare.style.top = y;
+        cropSquare.style.left = `${x}px`;
+        cropSizeSet(size);
+        cropXSet(x);
+        cropYSet(y);
     } else {
         /* Largura predominante */
+        let size = width;
+        let x = (height - width) / 2;
+        let y = 0;
+        /* Configurando */
         cropSquare.style.width = width + "px";
         cropSquare.style.height = width + "px";
-        cropSquare.style.top = 0;
-        cropSquare.style.left = `${(height - width) / 2}px`;
+        cropSquare.style.top = y;
+        cropSquare.style.left = `${x}px`;
+        cropSizeSet(size);
+        cropXSet(x);
+        cropYSet(y);
     };
 
 };

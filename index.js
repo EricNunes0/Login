@@ -16,9 +16,7 @@ const adminPost = require("./src/admin/adminPost");
 const adminRemove = require("./src/admin/adminRemove");
 const authGoogle = require("./src/validation/authGoogle");
 const createCookie = require("./src/cookies/createCookie");
-const createSessionsTable = require("./src/sessions/createSessionsTable");
 const deleteCookie = require("./src/cookies/deleteCookie");
-const dropSessionsTable = require("./src/sessions/dropSessionsTable");
 const getCookie = require("./src/cookies/getCookie");
 const getIcon = require("./src/getIcon");
 const homeGet = require("./src/home/homeGet");
@@ -53,7 +51,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-var userSession;
 app.get("/", (req, res, next) => {
     let sessionId = getCookie(req, "sessionId");
     if(sessionId) {
@@ -125,6 +122,10 @@ app.post("/get-icon", getIcon);
 app.post("/remove-icon", removeIcon);
 
 app.post("/update-icon", updateIcon);
+
+app.get("*", (req, res, next) => {
+    return res.status(404).redirect("/");
+});
 
 app.listen(process.env.PORT || port, () => {
     console.log(`Servidor iniciado na porta ${port}!`);

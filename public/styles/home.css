@@ -6,6 +6,9 @@
     --confirm-close-buttons-width: 48px;
     --confirm-close-buttons-height: 48px;
     --crop-arrows-size: 33.333%;
+    --crop-controls-width: 60px;
+    --crop-controls-height: 30px;
+    --crop-controls-color: rgba(0, 0, 0, 0.5);
     --crop-square-size: 100px;
     --fixed-button-size: 48px;
     --fixed-div-width: 400px;
@@ -22,9 +25,6 @@
     --menu-max-width: 300px;
     --menu-icons-size: 28px;
     --menu-items-height: 50px;
-    --popup-width: 300px;
-    --popup-height: 50px;
-    --popup-color: #202a30;
     --usericon-size: 96px;
 }
 
@@ -46,6 +46,15 @@ img, svg {
     -ms-user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
+}
+
+/* Canvas do ícone */
+#icon-canvas {
+    display: none;
+    pointer-events: none;
+    /*position: absolute;
+    left: 30%;
+    opacity: 1;*/
 }
 
 /* Menu fixo */
@@ -395,7 +404,9 @@ img, svg {
 
 #new-icon {
     max-width: 100%;
-    max-height: unset;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 300px;
 }
 
 /* Canvas do ícone novo */
@@ -433,15 +444,13 @@ img, svg {
 
 /* Quadrado do crop */
 #crop-square {
-    cursor: move;
+    /*cursor: move;*/
     position: absolute;
-    /*top: calc(50% - calc(var(--crop-square-size) / 2));
-    left: calc(50% - calc(var(--crop-square-size) / 2));*/
     min-width: var(--crop-square-size);
     min-height: var(--crop-square-size);
     max-width: 100%;
     max-height: 100%;
-    background-image: url("../svgs/home/crop-circle.svg");
+    background-image: url("../images/home/crop.png");
     background-position: center;
     background-size: 100% 100%;
     border: 2px solid #a0a0a0;
@@ -456,56 +465,94 @@ img, svg {
     outline: none;
 }
 .crop-arrows.top-left {
-    cursor: nw-resize;
+    /*cursor: nw-resize;*/
     top: 0;
     left: 0;
-    background-color: red;
     box-shadow: -5px -5px #fff;
 }
 .crop-arrows.top {
-    cursor: n-resize;
+    /*cursor: n-resize;*/
     top: 0;
     left: calc(50% - calc(var(--crop-arrows-size)) / 2);
-    background-color: orange;
 }
 .crop-arrows.top-right {
-    cursor: ne-resize;
+    /*cursor: ne-resize;*/
     top: 0;
     left: calc(100% - var(--crop-arrows-size));
-    background-color: yellow;
     box-shadow: 5px -5px #fff;
 }
 .crop-arrows.left {
-    cursor: w-resize;
+    /*cursor: w-resize;*/
     top: calc(50% - calc(var(--crop-arrows-size)) / 2);
     left: 0;
-    background-color: green;
 }
 .crop-arrows.right {
-    cursor: e-resize;
+    /*cursor: e-resize;*/
     top: calc(50% - calc(var(--crop-arrows-size)) / 2);
     left: calc(100% - var(--crop-arrows-size));
-    background-color: cyan;
 }
 .crop-arrows.bottom-left {
-    cursor: sw-resize;
+    /*cursor: sw-resize;*/
     top: calc(100% - var(--crop-arrows-size));
     left: 0;
-    background-color: blue;
     box-shadow: -5px 5px #fff;
 }
 .crop-arrows.bottom {
-    cursor: s-resize;
+    /*cursor: s-resize;*/
     top: calc(100% - var(--crop-arrows-size));
     left: calc(50% - calc(var(--crop-arrows-size)) / 2);
-    background-color: purple;
 }
 .crop-arrows.bottom-right {
-    cursor: se-resize;
+    /*cursor: se-resize;*/
     top: calc(100% - var(--crop-arrows-size));
     left: calc(100% - var(--crop-arrows-size));
-    background-color: magenta;
     box-shadow: 5px 5px #fff;
+}
+
+/* Div dos controles de crop */
+#crop-controls-div {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 15px 0;
+}
+
+/* Divs de cada controle de crop */
+.crop-controls-divs {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Labels do crop */
+.crop-labels {
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Controles de crop */
+.crop-controls {
+    position: relative;
+    width: var(--crop-controls-width);
+    height: var(--crop-controls-height);
+    background-color: var(--crop-controls-color);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 25px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+}
+.crop-controls::-webkit-inner-spin-button,
+.crop-controls::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Div dos botões de novo ícone */
@@ -593,76 +640,6 @@ img, svg {
     100% {
         rotate: 360deg;
     }
-}
-
-/* Área absoluta do popup */
-#popup-absolute {
-    pointer-events: none;
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Popups */
-.popups {
-    position: absolute;
-    bottom: calc(0px + calc(var(--popup-height) / 2));
-    min-width: var(--popup-width);
-    height: var(--popup-height);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--popup-color);
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    opacity: 1;
-    transition: all 0.3s;
-}
-
-.popups[class~="closed"] {
-    pointer-events: none;
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-/* Barras do popup */
-.popup-bars {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    transition: all 0.3s;
-}
-
-.popups[class~="green"] > .popup-bars {
-    background-color: #20ff60;
-}
-.popups[class~="red"] > .popup-bars {
-    background-color: #f02020;
-}
-
-/* Divs das mensagens do popup */
-.popup-message-divs {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Mensagens dos popups */
-.popup-messages {
-    color: #fff;
-    font-size: 16fpx;
 }
 
 #home-main {
@@ -878,6 +855,33 @@ img, svg {
     text-align: center;
 }
 
+/* Div online */
+#home-online-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Ícone online */
+#home-online-icon {
+    width: 18px;
+    height: 18px;
+    background-image: url("../svgs/home/wave.svg");
+    background-position: center;
+    background-size: 100% 100%;
+    transition: all 0.3s;
+    animation: HomeOnlineIcon 2s ease-out infinite;
+}
+@keyframes HomeOnlineIcon {
+    25%, 75% {
+        rotate: -15deg;
+    }
+    50% {
+        rotate: 0deg;
+    }
+}
+
 /* Texto da mensagem de online */
 #home-online-text {
     font-size: 18px;
@@ -886,9 +890,11 @@ img, svg {
     line-height: 24px;
     word-break: break-word;
     word-wrap: break-word;
-    color: #d0d0d0;
+    color: #20ff60;
     margin-top: 5px;
+    margin-bottom: 5px;
     text-align: center;
+    transition: all 0.3s;
 }
 
 /* Área principal */
@@ -1079,12 +1085,16 @@ img, svg {
     }
 
     #home-area {
-        padding-top: 140px;
+        padding-top: 60px;
     }
     
     .areas[class~="selected"] {
         flex-wrap: nowrap;
         padding: 0;
+    }
+
+    #welcome-message {
+        font-size: 28px;
     }
 }
 
